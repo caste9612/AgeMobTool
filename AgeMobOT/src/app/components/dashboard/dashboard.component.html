@@ -39,10 +39,10 @@
         </div>
 
         <div>
-          <button type="button" class="btn btn-primary btn-lg btn-block" *ngFor="let project of projects">{{project}}</button>
+          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="this.goToSelectedProject(project)" *ngFor="let project of projects" style="height: 100px;">{{project}}</button>
           <button type="button" class="btn btn-primary btn-lg btn-block">+</button>
         </div>
-       
+
 
       </div>
     </main>

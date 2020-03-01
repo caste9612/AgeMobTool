@@ -6,6 +6,8 @@ import { SignInComponent } from '../../components/sign-in/sign-in.component';
 import { SignUpComponent } from '../../components/sign-up/sign-up.component';
 import { DashboardComponent } from '../../components/dashboard/dashboard.component';
 import { VerifyEmailComponent } from '../../components/verify-email/verify-email.component';
+import { ProjectHomeComponent } from '../../components/projectHome/projectHome.component';
+
 
 // Import canActivate guard services
 import { AuthGuard } from "../../shared/guard/auth.guard";
@@ -17,6 +19,7 @@ const routes: Routes = [
   { path: 'sign-in', component: SignInComponent, canActivate: [SecureInnerPagesGuard]},
   { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'project-home', component: ProjectHomeComponent, canActivate: [AuthGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] }
 ];
 

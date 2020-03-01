@@ -13,10 +13,18 @@ export class DataServiceService {
   constructor(private db: AngularFirestore) { }
 
   projects = this.db.collection('projects');
+  selectedProject;
 
   getProjects(){
     return this.projects.snapshotChanges();
   }
+
+
+  setProject(project) {
+   this.selectedProject = project;
+  }
+
+
 
 
 }

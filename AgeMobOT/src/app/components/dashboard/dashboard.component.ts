@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { AuthService } from "../../shared/services/auth.service";
-import { Router } from "@angular/router";
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { DataServiceService } from 'src/app/shared/services/dataService.service';
 import { map } from 'rxjs/operators';
@@ -28,11 +28,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.dataService.getProjects().subscribe(
       projects => projects.forEach(element => {
-        if(this.projects.includes(element.payload.doc.id) === false){
+        if(this.projects.includes(element.payload.doc.id) === false) {
           this.projects.push(element.payload.doc.id);
         }
       })
     );
+  }
+
+
+
+  goToSelectedProject(project) {
+    this.dataService.setProject(project);
+    this.router.navigate(['project-home']);
   }
 
 }
