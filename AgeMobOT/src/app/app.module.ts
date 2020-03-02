@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+//Tree
+import { TreeviewModule } from 'ngx-treeview';
+
+
 // Reactive Form
 import { ReactiveFormsModule } from "@angular/forms";
 
@@ -38,7 +42,8 @@ import { AuthService } from "./shared/services/auth.service";
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TreeviewModule.forRoot()
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

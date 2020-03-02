@@ -40,10 +40,34 @@
 
         <div>
           <button type="button" class="btn btn-primary btn-lg btn-block" (click)="this.goToSelectedProject(project)" *ngFor="let project of projects" style="height: 100px;">{{project}}</button>
-          <button type="button" class="btn btn-primary btn-lg btn-block">+</button>
+          <!-- <-->
+          <!-- open a modal window by clicking button  basic bootstrap-->
+
+          <button type="button" class="btn btn-primary btn-lg btn-block"  (click)="openModal()">Add new project</button>
+          <div class="backdrop" [ngStyle]="{'display':display}">
+          </div>
+          <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+           <div class="modal-dialog" role="document">
+             <div class="modal-content">
+               <div class="modal-header">
+                  <h4 class="modal-title">New project</h4>
+                  <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+               </div>
+               <div class="modal-body">
+                <p>Add project code:</p>
+                <input type="text" class="form-contol" #input> <span class="input-group-btn input-space">
+
+                    <button class="btn btn-primary" (click)="getData(input.value)">Import data</button>
+                  </span>
+              </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" (click)="addProject(input.value)">Save</button>
+                  <button class="btn btn-primary" (click)="onCloseHandled()" >Close</button>
+               </div>
+             </div><!-- /.modal-content -->
+           </div><!-- /.modal-dialog -->
+          </div><!-- /.modal !-->
         </div>
-
-
       </div>
     </main>
 
