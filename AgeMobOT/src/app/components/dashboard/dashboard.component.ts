@@ -10,8 +10,18 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+ //styleUrls: ['./dashboard.component.css']
+ styles: [`
+ .backdrop{
+   background-color:rgba(0,0,0,0.6);
+   position:fixed;
+   top:0;
+   left:0;
+   width:100%;
+   height:100vh;
+   }`]
 })
+
 export class DashboardComponent implements OnInit {
 
   constructor(
@@ -22,15 +32,18 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   projects = [];
+  display = 'none';
+
 
 
 
   ngOnInit() {
     this.dataService.getProjects().subscribe(
       projects => projects.forEach(element => {
-        if(this.projects.includes(element.payload.doc.id) === false) {
-          this.projects.push(element.payload.doc.id);
+        if(this.projects.includes(element.payload.doc.id)) {
+          this.projects.splice(this.projects.indexOf(element.payload.doc.id));
         }
+        this.projects.push(element.payload.doc.id);
       })
     );
   }
@@ -42,4 +55,32 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['project-home']);
   }
 
+  onCloseHandled(){
+    this.display='none';
+  }
+
+  openModal(){
+    this.display='block';
+    }
+  getData(input){
+    console.log(input);
+  }
+
+  addProject(projectName){
+
+       // Add a new document in collection "students"
+        const prog= this.dataService.projects.doc(projectName);
+
+        prog.set({
+            //setsomevalue
+        })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
+    };
+
 }
+
