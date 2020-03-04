@@ -11,7 +11,16 @@ import { ConditionalExpr } from '@angular/compiler';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.css']
+  //styleUrls: ['./student-list.component.css']
+  styles: [`
+  .backdrop{
+    background-color:rgba(0,0,0,0.4);
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    }`]
 })
 
 export class StudentListComponent implements OnInit , AfterViewInit{
@@ -35,31 +44,14 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   status = 'Enable';
   prova;
   email;
-
+  contact;
+  selectedProject;
 
   nome ;
-/*
-  this.dataService.getStudentList().subscribe(
-    students => students.forEach(element => {
-      if(this.students.includes(element.payload.doc.id)) {
-        this.students.splice(this.students.indexOf(element.payload.doc.id));
-      }
-      this.students.push(element.payload.doc.id);
-    })
-    );
 
-
-
-    this.dataService.getStudentList().subscribe(
-      students => students.forEach(element => {
-        if(this.students.includes(element.payload.doc.id)) {
-          this.students.splice(this.students.indexOf(element.payload.doc._document));
-        }
-        this.students.push(element.payload.doc['Eleonora Leone'].proto.fields.ols1);
-      })
-*/
   ngOnInit() {
 
+    this.selectedProject = this.dataService.selectedProject;
 
     this.dataService.getStudentList().subscribe(
       students => students.forEach(element => {
@@ -135,17 +127,14 @@ export class StudentListComponent implements OnInit , AfterViewInit{
     this.display='block';
     this.nome = student;
 
-    this.dataService.getStudentData();
-      /*students => students.forEach(element => {
-
-        element.payload.doc.data().email;
-        console.log(element.payload.doc.data().email);
-        this.email = element.payload.doc.data().email;
-
-*/
-
-
-    }
+    this.dataService.getStudentList().subscribe(
+      studentList => studentList.forEach(studentG => {
+        if(studentG.payload.doc.id===student){
+          this.email = studentG.payload.doc.data().email;
+          this.contact = studentG.payload.doc.data().contact;
+        }
+      }))
+ }
   getData(input){
     console.log(input);
   }

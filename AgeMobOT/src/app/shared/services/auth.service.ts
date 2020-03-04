@@ -49,6 +49,10 @@ export class AuthService {
     this.router.navigate(['dashboard']);
   }
 
+  goToProjectHome(){
+    this.router.navigate(['project-home']);
+  }
+
   // Sign up with email/password
   SignUp(email, password) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)

@@ -16,8 +16,13 @@
         <div class="sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
-              <a class="nav-link active">
-                <i class="fas fa-user"></i>Student List
+              <a class="nav-link active"  (click)="authService.goToDash()">
+                <i class="fas fa-user"></i>Projects
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active"  (click)="authService.goToProjectHome()">
+                <i class="fas fa-folder-open"></i>{{selectedProject}}
               </a>
             </li>
             <!-- Calling SignOut() Api from AuthService -->
@@ -63,21 +68,22 @@
                 <div class="backdrop" [ngStyle]="{'display':display}">
                 </div>
                 <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">{{nome}}</h4>
-                        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
                     </div>
                     <div class="modal-body">
-                      <p>email:</p> <p>{{email}}</p>
-                      <input type="text" class="form-contol" #input> <span class="input-group-btn input-space">
+                      <p>email: {{email}} <span class="btn btn-space"></span><button class="btn btn-outline-dark"></button></p> 
+                      <p>contact: {{contact}} <span class="btn btn-space"></span><button class="btn btn-outline-dark"></button></p> 
+                      <!--input type="text" class="form-contol" #input--> <span class="input-group-btn input-space">
 
                           <!--button class="btn btn-primary" (click)="getData(input.value)"--><!--/button-->
                         </span>
                     </div>
                       <div class="modal-footer">
-                        <button class="btn btn-primary" (click)="onCloseHandled()" >Close</button>
+                        <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
                     </div>
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->

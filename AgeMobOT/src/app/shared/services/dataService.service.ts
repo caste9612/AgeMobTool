@@ -58,11 +58,5 @@ export class DataServiceService {
     .collection('Destinations').doc(this.selectedDestination).collection('Date').doc(this.selectedDate);
   }
 
-  getStudentData(){
-    return this.student.doc(this.selectedStudents).snapshotChanges;
-  }
-
-
-
 
 }
