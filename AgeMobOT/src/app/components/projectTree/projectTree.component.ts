@@ -213,6 +213,10 @@ export class ProjectTreeComponent implements OnInit {
     if (e.node.parent.parent.parent != null){
       if (e.node.parent.parent.parent.value === "Countries"){
       //sett la roba del data service e naviga con il ruter
+      this.dataService.selectedCountry = e.node.parent.parent.value;
+      this.dataService.selectedDestination = e.node.parent.value;
+      this.dataService.selectedDate = e.node.value;
+      this.router.navigate(['student-list']);
       }
     }
   }
