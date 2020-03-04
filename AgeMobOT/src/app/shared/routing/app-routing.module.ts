@@ -12,6 +12,7 @@ import { ProjectHomeComponent } from '../../components/projectHome/projectHome.c
 // Import canActivate guard services
 import { AuthGuard } from "../../shared/guard/auth.guard";
 import { SecureInnerPagesGuard } from "../../shared/guard/secure-inner-pages.guard";
+import { StudentListComponent } from 'src/app/components/student-list/student-list.component';
 
 // Include route guard in routes array
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'register-user', component: SignUpComponent, canActivate: [SecureInnerPagesGuard]},
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'project-home', component: ProjectHomeComponent, canActivate: [AuthGuard] },
+  { path: 'student-list', component: StudentListComponent, canActivate: [AuthGuard] },
   { path: 'verify-email-address', component: VerifyEmailComponent, canActivate: [SecureInnerPagesGuard] }
 ];
 

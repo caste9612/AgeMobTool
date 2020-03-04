@@ -1,0 +1,112 @@
+<!-- Top navigation -->
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+    <a>
+      <img class="brand-logo" src="assets/LOGO.png" alt="AgeMob Logo" style="height: 60px;">
+      <span class="student-text">Student List</span>
+    </a>
+  </nav>
+  
+  
+  
+  <!-- Sidebar navigation -->
+  <div class="container-fluid">
+    <div class="row">
+  
+      <nav class="col-md-2 d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active">
+                <i class="fas fa-user"></i>Student List
+              </a>
+            </li>
+            <!-- Calling SignOut() Api from AuthService -->
+            <li class="nav-item">
+              <a class="nav-link" (click)="authService.SignOut()">
+                <i class="fas fa-sign-out-alt"></i>Log out
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+  
+      <!-- Main content -->
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+        <div class="inner-adjust">
+  
+          <div class="pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Student List</h1>
+          </div>
+          
+          <table class="table table-bordered table-hover table-fixed table-responsive-md btn-table">
+            <thead>
+              <tr>
+                <th scope="col">Student</th>
+                <th scope="col">Document</th>
+                <th scope="col">OLS test</th>
+                <th scope="col">Tickets</th>
+                <th scope="col">Mid-term check</th>
+                <th scope="col">Final check</th>
+                <th scope="col">Tickets</th>
+                <th scope="col">OLS test</th>
+                <th scope="col">Report</th>
+              </tr>
+            </thead>
+            <tbody>
+             
+   
+             
+              <tr *ngFor="let student of students">
+
+                <th scope="row"><button type="button" class="btn btn-outline-dark" (click)="openModal(student)">{{student}}</button>
+
+                <div class="backdrop" [ngStyle]="{'display':display}">
+                </div>
+                <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{nome}}</h4>
+                        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>email:</p> <p>{{email}}</p>
+                      <input type="text" class="form-contol" #input> <span class="input-group-btn input-space">
+
+                          <!--button class="btn btn-primary" (click)="getData(input.value)"--><!--/button-->
+                        </span>
+                    </div>
+                      <div class="modal-footer">
+                        <button class="btn btn-primary" (click)="onCloseHandled()" >Close</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+                </div><!-- /.modal !-->
+              </th>
+                <td>
+                  <!--button type="button" class="btn btn-outline-dark"--><!--/button-->
+                  <button type="button" class="btn btn-outline-dark">Download</button>
+                </td>
+                <td>
+                  <button class="btn btn-outline-dark btn-space"(click)="changeValueOls1(student)"id="{{'ols1'+student}}"> 
+                  </button>
+                </td>
+                <td><button type="button" class="btn btn-outline-dark">Upload</button></td>
+                <td><button type="button" class="btn btn-outline-dark">View</button></td>
+                <td><button type="button" class="btn btn-outline-dark">Upload</button></td>
+                <td></td>
+                <td><button type="button" class="btn btn-outline-dark"(click)="changeValueOls2(student)" id="{{'ols2'+student}}" ></button></td>
+                <td><button type="button" class="btn btn-outline-dark"(click)="changeValueReport(student)" id="{{'report'+student}}" ></button></td>
+              </tr>
+
+
+              
+            </tbody>
+          </table>
+          
+        </div>
+      </main>
+  
+    </div>
+  </div>
+  

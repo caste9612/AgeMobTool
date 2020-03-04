@@ -13,7 +13,16 @@ export class DataServiceService {
   constructor(private db: AngularFirestore) { }
 
   projects = this.db.collection('projects');
-  selectedProject;
+  selectedProject = 'PCODE2019';
+  selectedCountry = 'Spain';
+  selectedDestination = 'Madrid';
+  selectedDate = '10-03.11-06';
+  selectedStudents = 'Students';
+  selectedOls = 'ols1';
+
+  student = this.projects.doc(this.selectedProject).collection('Countries').doc(this.selectedCountry)
+  .collection('Destinations').doc(this.selectedDestination).collection('Date').doc(this.selectedDate).collection('Students');
+
 
   getProjects() {
     return this.projects.snapshotChanges();
@@ -35,6 +44,22 @@ export class DataServiceService {
 
   setProject(project) {
    this.selectedProject = project;
+  }
+
+  getStudentList(){
+    return  this.student.snapshotChanges();
+    // .doc(this.selectedDestination).collection('Date').
+    // doc(this.selectedDate).collection('Students').snapshotChanges();
+  }
+
+  getProva(){
+
+    return this.projects.doc(this.selectedProject).collection('Countries').doc(this.selectedCountry)
+    .collection('Destinations').doc(this.selectedDestination).collection('Date').doc(this.selectedDate);
+  }
+
+  getStudentData(){
+    return this.student.doc(this.selectedStudents).snapshotChanges;
   }
 
 

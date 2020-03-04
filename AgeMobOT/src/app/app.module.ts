@@ -28,6 +28,7 @@ import { firebaseConfig } from '../environments/environment';
 import { AuthService } from "./shared/services/auth.service";
 import { ProjectHomeComponent } from './components/projectHome/projectHome.component';
 import { ProjectTreeComponent } from './components/projectTree/projectTree.component';
+import { StudentListComponent } from './components/student-list/student-list.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ProjectTreeComponent } from './components/projectTree/projectTree.compo
     DashboardComponent,
     VerifyEmailComponent,
     ProjectHomeComponent,
-    ProjectTreeComponent
+    ProjectTreeComponent,
+    StudentListComponent
   ],
   imports: [
     BrowserModule,
