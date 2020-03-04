@@ -1,0 +1,20 @@
+<div class="tree-container tree-container--with-controls">
+  <div class="tree-info">
+    <h3>Project structure</h3>
+  </div>
+  <div class="tree-content">
+      <tree #treeFFS
+            [tree]="project"
+            (nodeRemoved)="onNodeRemoved($event)"
+            (nodeRenamed)="onNodeRenamed($event)"
+            (nodeSelected)="onNodeSelected($event)"
+            (nodeUnselected)="onNodeUnselected($event)"
+            (nodeMoved)="onNodeMoved($event)"
+            (nodeCreated)="onNodeFFSCreated($event)"
+            (nodeExpanded)="onNodeExpanded($event)"
+            (nodeCollapsed)="onNodeCollapsed($event)"
+            [settings]="settings">
+      </tree>
+  </div>
+
+

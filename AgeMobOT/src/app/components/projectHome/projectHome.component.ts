@@ -3,7 +3,6 @@ import { AuthService } from '../../shared/services/auth.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { DataServiceService } from 'src/app/shared/services/dataService.service';
-import { TreeviewItem } from 'ngx-treeview';
 
 
 @Component({

@@ -15,8 +15,21 @@ export class DataServiceService {
   projects = this.db.collection('projects');
   selectedProject;
 
-  getProjects(){
+  getProjects() {
     return this.projects.snapshotChanges();
+  }
+
+  getDestinations(country: string) {
+    return this.projects.doc(this.selectedProject).collection('Countries').doc(country).collection("Destinations").snapshotChanges();
+  }
+
+  getDate(country: string, destination: string) {
+    return this.projects.doc(this.selectedProject).collection('Countries').doc(country).collection("Destinations")
+    .doc(destination).collection('Date').snapshotChanges();
+  }
+
+  getCountries() {
+    return this.projects.doc(this.selectedProject).collection('Countries').snapshotChanges();
   }
 
 

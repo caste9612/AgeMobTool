@@ -41,7 +41,7 @@ export class DashboardComponent implements OnInit {
     this.dataService.getProjects().subscribe(
       projects => projects.forEach(element => {
         if(this.projects.includes(element.payload.doc.id)) {
-          this.projects.splice(this.projects.indexOf(element.payload.doc.id));
+          this.projects.splice(this.projects.indexOf(element.payload.doc.id), 1);
         }
         this.projects.push(element.payload.doc.id);
       })

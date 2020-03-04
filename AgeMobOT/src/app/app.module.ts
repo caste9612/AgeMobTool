@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 //Tree
-import { TreeviewModule } from 'ngx-treeview';
+import { TreeModule } from 'ng2-tree';
 
 
 // Reactive Form
@@ -26,6 +26,8 @@ import { firebaseConfig } from '../environments/environment';
 
 // Auth service
 import { AuthService } from "./shared/services/auth.service";
+import { ProjectHomeComponent } from './components/projectHome/projectHome.component';
+import { ProjectTreeComponent } from './components/projectTree/projectTree.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { AuthService } from "./shared/services/auth.service";
     SignInComponent,
     SignUpComponent,
     DashboardComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+    ProjectHomeComponent,
+    ProjectTreeComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +47,7 @@ import { AuthService } from "./shared/services/auth.service";
     AngularFireAuthModule,
     AngularFirestoreModule,
     ReactiveFormsModule,
-    TreeviewModule.forRoot()
+    TreeModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
