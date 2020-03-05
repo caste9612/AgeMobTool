@@ -23,6 +23,7 @@ export class DataServiceService {
   student = this.projects.doc(this.selectedProject).collection('Countries').doc(this.selectedCountry)
   .collection('Destinations').doc(this.selectedDestination).collection('Date').doc(this.selectedDate).collection('Students');
 
+  
 
   getProjects() {
     return this.projects.snapshotChanges();

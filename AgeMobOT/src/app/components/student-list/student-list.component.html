@@ -48,67 +48,110 @@
               <tr>
                 <th scope="col">Student</th>
                 <th scope="col">Document</th>
-                <th scope="col">OLS test</th>
-                <th scope="col">Tickets</th>
+                <th scope="col" style="width:10%">OLS test</th>
+                <th scope="col" style="width:10%">Tickets</th>
                 <th scope="col">Mid-term check</th>
                 <th scope="col">Final check</th>
-                <th scope="col">Tickets</th>
-                <th scope="col">OLS test</th>
-                <th scope="col">Report</th>
+                <th scope="col" style="width:10%">Tickets</th>
+                <th scope="col"style="width:10%">OLS test</th>
+                <th scope="col"style="width:10%">Report</th>
               </tr>
             </thead>
             <tbody>
              
    
-             
-              <tr *ngFor="let student of students">
+            
+            <tr *ngFor="let student of students">
+              <th scope="row"><button type="button" class="btn btn-outline-dark" (click)="openModal(student)">{{student}}</button>
 
-                <th scope="row"><button type="button" class="btn btn-outline-dark" (click)="openModal(student)">{{student}}</button>
-
+                <!-- First Modal-->
                 <div class="backdrop" [ngStyle]="{'display':display}">
                 </div>
                 <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">{{nome}}</h4>
-                        <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                      <p>email: {{email}} <span class="btn btn-space"></span><button class="btn btn-outline-dark"></button></p> 
-                      <p>contact: {{contact}} <span class="btn btn-space"></span><button class="btn btn-outline-dark"></button></p> 
-                      <!--input type="text" class="form-contol" #input--> <span class="input-group-btn input-space">
-
-                          <!--button class="btn btn-primary" (click)="getData(input.value)"--><!--/button-->
-                        </span>
-                    </div>
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                          <h4 class="modal-title">{{nome}}</h4>
+                          <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                      </div>
+                      <div class="modal-body">
+                        <p>email: {{email}} <span class="btn btn-space"></span></p> 
+                        <p>contact: {{contact}} <span class="btn btn-space"></span></p> 
+                        <span class="input-group-btn input-space"></span>
+                      </div>
                       <div class="modal-footer">
                         <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
-                    </div>
-                  </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
+                        <button class="btn btn-outline-dark" (click)="closeAndOpen()">Edit</button>
+
+                          <!-- Edit modal-->
+                          <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display1}">
+                            <div class="modal-lg modal-dialog modal-dialog-centered" style ="width: 30%" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">{{nome}}</h4>
+                                    <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                                </div>
+                                <div class="modal-body">
+                                  <p>email: <input type="text" class="form-contol" #input value={{email}}><span class="btn btn-space"></span></p> 
+                                  <p>contact: <input type="text" class="form-contol" #input2 value={{contact}}><span class="btn btn-space"></span></p> 
+                                  <span class="input-group-btn input-space"> </span>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-primary" (click)="onCloseNewModal()">Close</button>
+                                  <button class="btn btn-outline-dark" (click)="modifiedField(input.value,input2.value,nome)"(click)="onCloseNewModal()">Save</button>
+                                </div>
+                                  
+                              </div><!-- /.edit modal-content -->
+                            </div><!-- /.edit modal-dialog -->
+                          </div><!-- /.edit modal !-->
+                          <!--end Edit modal-->
+
+                      
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
                 </div><!-- /.modal !-->
+                <!-- end modal-->
+                
               </th>
-                <td>
-                  <!--button type="button" class="btn btn-outline-dark"--><!--/button-->
-                  <button type="button" class="btn btn-outline-dark">Download</button>
-                </td>
-                <td>
-                  <button class="btn btn-outline-dark btn-space"(click)="changeValueOls1(student)"id="{{'ols1'+student}}"> 
-                  </button>
-                </td>
-                <td><button type="button" class="btn btn-outline-dark">Upload</button></td>
-                <td><button type="button" class="btn btn-outline-dark">View</button></td>
-                <td><button type="button" class="btn btn-outline-dark">Upload</button></td>
-                <td></td>
-                <td><button type="button" class="btn btn-outline-dark"(click)="changeValueOls2(student)" id="{{'ols2'+student}}" ></button></td>
-                <td><button type="button" class="btn btn-outline-dark"(click)="changeValueReport(student)" id="{{'report'+student}}" ></button></td>
-              </tr>
+                <td><div class="col text-center"> <button type="button" class="btn btn-outline-dark">Download</button></div></td>
+                <td><div class="col text-center" > <button type="button" class="btn btn-outline-dark btn-space" style="width: 110px" (click)="changeValueOls1(student)"id="{{'ols1'+student}}"></button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 80px" >Upload</button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 70px" >View</button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 70px" >View</button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 80px" >Upload</button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 110px" (click)="changeValueOls2(student)" id="{{'ols2'+student}}" ></button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 110px" (click)="changeValueReport(student)" id="{{'report'+student}}"></button></div></td>
+            </tr>
+
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-outline-dark" (click)="openModalNewStudent()"><i class="fas fa-user"></i>New Student</button>
 
 
+        <!--New Student-->
+        <div class="backdrop" [ngStyle]="{'display':display2}">
+        </div>
+        <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display2}">
+          <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h4 class="modal-title">New student</h4>
+                  <button type="button" class="close" aria-label="Close"  (click)="onCloseModalNewStudent()"> <span aria-hidden="true">&times;</span></button>
+              </div>
+              <div class="modal-body">
+                <p>Name: <input type="text" class="form-contol" #input> <span class="btn btn-space"> </span></p>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-primary" (click)="onCloseModalNewStudent()">Close</button>
+                <button class="btn btn-outline-dark" (click)="onCloseModalNewStudent()"(click)="addStudent(input.value)">Save</button>
+              </div>
               
-            </tbody>
-          </table>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal !-->
+
+
           
         </div>
       </main>
