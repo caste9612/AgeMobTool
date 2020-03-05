@@ -27,11 +27,13 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   projects = [];
   students = [];
   display = 'none';
+  display1 = 'none';
   displayUpload = 'none';
   displayDownloadDepartureTicket = 'none';
   departureTicketUrl: string;
   columns: string[] = [];
   rows: number[] = [];
+  display2 = 'none';
   ols1;
   ols2;
 
@@ -41,6 +43,7 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   email;
   contact;
   selectedProject;
+  input;
 
   nome ;
 
@@ -155,6 +158,15 @@ export class StudentListComponent implements OnInit , AfterViewInit{
 }
 
 
+
+ closeAndOpen(){
+  this.display1='block';
+  
+ }
+ onCloseNewModal(){
+  this.display1='none';
+ }
+
   getData(input){
     console.log(input);
   }
@@ -173,21 +185,18 @@ export class StudentListComponent implements OnInit , AfterViewInit{
         .catch(function(error) {
             console.error("Error writing document: ", error);
         });
+    };
+
+    modifiedField(input,input2,student){
+
+      this.dataService.getProva().collection('Students').doc('/' + student).update({email: input})
+
+      this.dataService.getProva().collection('Students').doc('/' + student).update({contact: input2})
+
     }
-/*
-    updateDoc(_id: string, _value: string) {
-      let doc = this.afs.collection('options', ref => ref.where('id', '==', _id));
-      doc.snapshotChanges().pipe(
-        map(actions => actions.map(a => {
-          const data = a.payload.doc.data();
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        }))).subscribe((_doc: any) => {
-         let id = _doc[0].payload.doc.id; //first result of query [0]
-         this.afs.doc(`options/${id}`).update({rating: _value});
-        })
-    }
-*/
+
+    
+
     changeValueOls1(student){
 
 
@@ -221,6 +230,38 @@ export class StudentListComponent implements OnInit , AfterViewInit{
       });
     }
 
+
+    openModalNewStudent(){
+      this.display2 = 'block';
+      
+    }
+
+    onCloseModalNewStudent(){
+      this.display2 = 'none';
+    }
+
+    addStudent(studentName){
+
+      // Add a new document in collection "students"
+       const stud= this.dataService.student.doc(studentName);
+
+       stud.set({
+
+        ols1: 'red',
+        ols2: 'red',
+        email: '',
+        contact: '',
+        report: 'red'
+           //setsomevalue
+
+       })
+       .then(function() {
+           console.log("Document successfully written!");
+       })
+       .catch(function(error) {
+           console.error("Error writing document: ", error);
+       });
+   };
 
 
 }

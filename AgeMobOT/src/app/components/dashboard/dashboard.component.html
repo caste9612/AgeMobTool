@@ -47,18 +47,14 @@
           <div class="backdrop" [ngStyle]="{'display':display}">
           </div>
           <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
-           <div class="modal-dialog modal-dialog-centered" role="document">
+           <div class="modal-lg modal-dialog modal-dialog-centered" style ="width: 34%"role="document">
              <div class="modal-content">
                <div class="modal-header">
                   <h4 class="modal-title">New project</h4>
                   <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
                </div>
                <div class="modal-body">
-                <p>Add project code:</p>
-                <input type="text" class="form-contol" #input> <span class="btn btn-space">
-
-                    <button class="btn btn-primary" (click)="getData(input.value)"><i class="fas fa-file-import"></i>Import data</button>
-                  </span>
+                <p>Add project code:<input type="text" class="form-contol" #input> <span class="btn btn-space"><button class="btn btn-primary" (click)="getData(input.value)"><i class="fas fa-file-import"></i>Import data</button></span></p>
               </div>
                 <div class="modal-footer">
                   <button class="btn btn-primary" (click)="onCloseHandled()"><i class="fas fa-times"></i>Close</button>
