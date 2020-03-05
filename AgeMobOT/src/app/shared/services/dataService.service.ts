@@ -12,6 +12,8 @@ export class DataServiceService {
 
   constructor(private db: AngularFirestore) { }
 
+  downloadURL: string;
+
   projects = this.db.collection('projects');
   selectedProject = 'PCODE2019';
   selectedCountry = 'Spain';
@@ -19,6 +21,7 @@ export class DataServiceService {
   selectedDate = '10-03.11-06';
   selectedStudents = 'Students';
   selectedOls = 'ols1';
+  uploadingStudent;
 
   student = this.projects.doc(this.selectedProject).collection('Countries').doc(this.selectedCountry)
   .collection('Destinations').doc(this.selectedDestination).collection('Date').doc(this.selectedDate).collection('Students');
@@ -56,6 +59,13 @@ export class DataServiceService {
 
     return this.projects.doc(this.selectedProject).collection('Countries').doc(this.selectedCountry)
     .collection('Destinations').doc(this.selectedDestination).collection('Date').doc(this.selectedDate);
+  }
+
+  getStudentTicketsFolder() {
+    return this.projects.doc(this.selectedProject).collection('Countries')
+        .doc(this.selectedCountry).collection('Destinations').doc(this.selectedDestination)
+        .collection('Date').doc(this.selectedDate).collection('Students').doc(this.uploadingStudent)
+        .collection('tickets');
   }
 
 

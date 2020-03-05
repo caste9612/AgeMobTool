@@ -23,12 +23,22 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from '../environments/environment';
+import {AngularFireStorageModule} from "@angular/fire/storage";
+
 
 // Auth service
 import { AuthService } from "./shared/services/auth.service";
+
+//Directive
+import { DropzoneDirective } from './shared/services/dropzone.directive';
+
+
+//Components
 import { ProjectHomeComponent } from './components/projectHome/projectHome.component';
 import { ProjectTreeComponent } from './components/projectTree/projectTree.component';
 import { StudentListComponent } from './components/student-list/student-list.component';
+import { UploadTaskComponent } from './components/upload-task/upload-task.component';
+import { UploaderComponent } from './components/uploader/uploader.component';
 
 
 @NgModule({
@@ -40,7 +50,10 @@ import { StudentListComponent } from './components/student-list/student-list.com
     VerifyEmailComponent,
     ProjectHomeComponent,
     ProjectTreeComponent,
-    StudentListComponent
+    StudentListComponent,
+    UploadTaskComponent,
+    UploaderComponent,
+    DropzoneDirective
   ],
   imports: [
     BrowserModule,
@@ -48,6 +61,7 @@ import { StudentListComponent } from './components/student-list/student-list.com
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireStorageModule,
     ReactiveFormsModule,
     TreeModule
   ],

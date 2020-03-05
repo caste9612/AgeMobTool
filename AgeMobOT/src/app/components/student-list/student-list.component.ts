@@ -6,21 +6,13 @@ import { DataServiceService } from 'src/app/shared/services/dataService.service'
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ConditionalExpr } from '@angular/compiler';
+import { tick } from '@angular/core/testing';
 
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './student-list.component.html',
-  //styleUrls: ['./student-list.component.css']
-  styles: [`
-  .backdrop{
-    background-color:rgba(0,0,0,0.4);
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100vh;
-    }`]
+  styleUrls: ['./student-list.component.css']
 })
 
 export class StudentListComponent implements OnInit , AfterViewInit{
@@ -35,8 +27,11 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   projects = [];
   students = [];
   display = 'none';
-  columns:string[]=[];
-  rows:number[]=[];
+  displayUpload = 'none';
+  displayDownloadDepartureTicket = 'none';
+  departureTicketUrl: string;
+  columns: string[] = [];
+  rows: number[] = [];
   ols1;
   ols2;
 
@@ -65,52 +60,57 @@ export class StudentListComponent implements OnInit , AfterViewInit{
         document.getElementById('ols2'+element.payload.doc.id);
       })
       );
-
     }
-    ngAfterViewInit(): void {
-      this.dataService.getStudentList().subscribe(
-        students => students.forEach(element => {
 
-          document.getElementById('ols1'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().ols1;
+  ngAfterViewInit(): void {
+    this.dataService.getStudentList().subscribe(
+      students => students.forEach(element => {
 
-          if(element.payload.doc.data().ols1==='green'){
-            document.getElementById('ols1'+element.payload.doc.id).textContent = 'Verified';
-          }
-          else if (element.payload.doc.data().ols1==='yellow'){
-            document.getElementById('ols1'+element.payload.doc.id).textContent = 'Waiting';
-          }
-          else{
-            document.getElementById('ols1'+element.payload.doc.id).textContent = 'Not loaded';
+        document.getElementById('ols1'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().ols1;
 
-          }
+        if(element.payload.doc.data().ols1==='green'){
+          document.getElementById('ols1'+element.payload.doc.id).textContent = 'Verified';
+        }
+        else if (element.payload.doc.data().ols1==='yellow'){
+          document.getElementById('ols1'+element.payload.doc.id).textContent = 'Waiting';
+        }
+        else{
+          document.getElementById('ols1'+element.payload.doc.id).textContent = 'Not loaded';
+
+        }
 
 
-          document.getElementById('ols2'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().ols2;
+        document.getElementById('ols2'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().ols2;
 
-          if(element.payload.doc.data().ols2==='green'){
-            document.getElementById('ols2'+element.payload.doc.id).textContent = 'Verified';
-          }
-          else if (element.payload.doc.data().ols2==='yellow'){
-            document.getElementById('ols2'+element.payload.doc.id).textContent = 'Waiting';
-          }
-          else{
-            document.getElementById('ols2'+element.payload.doc.id).textContent = 'Not loaded';
+        if(element.payload.doc.data().ols2==='green'){
+          document.getElementById('ols2'+element.payload.doc.id).textContent = 'Verified';
+        }
+        else if (element.payload.doc.data().ols2==='yellow'){
+          document.getElementById('ols2'+element.payload.doc.id).textContent = 'Waiting';
+        }
+        else{
+          document.getElementById('ols2'+element.payload.doc.id).textContent = 'Not loaded';
 
-          }
+        }
 
-          document.getElementById('report'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().report;
+        document.getElementById('report'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().report;
 
-          if(element.payload.doc.data().report==='green'){
-            document.getElementById('report'+element.payload.doc.id).textContent = 'Done';
+        if(element.payload.doc.data().report==='green'){
+          document.getElementById('report'+element.payload.doc.id).textContent = 'Done';
 
-          }else{
-            document.getElementById('report'+element.payload.doc.id).textContent = 'Not loaded';
+        }else{
+          document.getElementById('report'+element.payload.doc.id).textContent = 'Not loaded';
 
-          }
+        }
 
-        })
-        );
-    }
+        if (element.payload.doc.data().departureTicket ==='Uploaded') {
+          document.getElementById('departureTicketUploadButton' + element.payload.doc.id).style.backgroundColor = 'lightgreen';
+        }else{
+          document.getElementById('departureTicketUploadButton' + element.payload.doc.id).style.backgroundColor = 'white';
+        }
+      })
+      );
+  }
 
 
 
@@ -120,7 +120,9 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   }
 
   onCloseHandled(){
-    this.display='none';
+    this.display = 'none';
+    this.displayUpload = 'none';
+    this.displayDownloadDepartureTicket = 'none';
   }
 
   openModal(student){
@@ -135,6 +137,24 @@ export class StudentListComponent implements OnInit , AfterViewInit{
         }
       }))
  }
+
+ openModalUpload(student) {
+
+  this.displayUpload = 'block';
+  this.nome = student;
+  this.dataService.uploadingStudent = student;
+  this.dataService.getStudentTicketsFolder().snapshotChanges().subscribe(
+    tickets => tickets.forEach(ticket => {
+      if (ticket.payload.doc.id === 'departure') {
+        this.dataService.downloadURL = ticket.payload.doc.data().downloadURL;
+        this.departureTicketUrl = ticket.payload.doc.data().downloadURL;
+        this.displayDownloadDepartureTicket = 'flex';
+      }
+    })
+  )
+}
+
+
   getData(input){
     console.log(input);
   }
@@ -153,7 +173,7 @@ export class StudentListComponent implements OnInit , AfterViewInit{
         .catch(function(error) {
             console.error("Error writing document: ", error);
         });
-    };
+    }
 /*
     updateDoc(_id: string, _value: string) {
       let doc = this.afs.collection('options', ref => ref.where('id', '==', _id));
