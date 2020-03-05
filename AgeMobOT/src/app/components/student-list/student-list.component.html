@@ -58,9 +58,9 @@
               </tr>
             </thead>
             <tbody>
-             
-   
-            
+
+
+
             <tr *ngFor="let student of students">
               <th scope="row"><button type="button" class="btn btn-outline-dark" (click)="openModal(student)">{{student}}</button>
 
@@ -75,8 +75,8 @@
                           <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
                       </div>
                       <div class="modal-body">
-                        <p>email: {{email}} <span class="btn btn-space"></span></p> 
-                        <p>contact: {{contact}} <span class="btn btn-space"></span></p> 
+                        <p>email: {{email}} <span class="btn btn-space"></span></p>
+                        <p>contact: {{contact}} <span class="btn btn-space"></span></p>
                         <span class="input-group-btn input-space"></span>
                       </div>
                       <div class="modal-footer">
@@ -92,21 +92,21 @@
                                     <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
                                 </div>
                                 <div class="modal-body">
-                                  <p>email: <input type="text" class="form-contol" #input value={{email}}><span class="btn btn-space"></span></p> 
-                                  <p>contact: <input type="text" class="form-contol" #input2 value={{contact}}><span class="btn btn-space"></span></p> 
+                                  <p>email: <input type="text" class="form-contol" #input value={{email}}><span class="btn btn-space"></span></p>
+                                  <p>contact: <input type="text" class="form-contol" #input2 value={{contact}}><span class="btn btn-space"></span></p>
                                   <span class="input-group-btn input-space"> </span>
                                 </div>
                                 <div class="modal-footer">
                                   <button class="btn btn-primary" (click)="onCloseNewModal()">Close</button>
                                   <button class="btn btn-outline-dark" (click)="modifiedField(input.value,input2.value,nome)"(click)="onCloseNewModal()">Save</button>
                                 </div>
-                                  
+
                               </div><!-- /.edit modal-content -->
                             </div><!-- /.edit modal-dialog -->
                           </div><!-- /.edit modal !-->
                           <!--end Edit modal-->
 
-                      
+
                       </div>
                     </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
@@ -167,9 +167,6 @@
         <button type="button" class="btn btn-outline-dark" (click)="openModalNewStudent()"><i class="fas fa-user"></i>New Student</button>
 
 
-            </tbody>
-          </table>
-
 
         <!--New Student-->
         <div class="backdrop" [ngStyle]="{'display':display2}">
@@ -188,13 +185,13 @@
                 <button class="btn btn-primary" (click)="onCloseModalNewStudent()">Close</button>
                 <button class="btn btn-outline-dark" (click)="onCloseModalNewStudent()"(click)="addStudent(input.value)">Save</button>
               </div>
-              
+
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal !-->
 
 
-          
+
         </div>
 
       </main>
