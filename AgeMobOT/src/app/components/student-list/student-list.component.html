@@ -1,129 +1,121 @@
 <!-- Top navigation -->
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-    <a>
-      <img class="brand-logo" src="assets/LOGO.png" alt="AgeMob Logo" style="height: 60px;">
-      <span class="dasboard-text">Student List</span>
-    </a>
-  </nav>
+  <a>
+    <img class="brand-logo" src="assets/LOGO.png" alt="AgeMob Logo" style="height: 60px;">
+    <span class="student-text">Student List</span>
+  </a>
+</nav>
 
 
 
-  <!-- Sidebar navigation -->
-  <div class="container-fluid">
-    <div class="row">
+<!-- Sidebar navigation -->
+<div class="container-fluid">
+  <div class="row">
 
-      <nav class="col-md-2 d-md-block bg-light sidebar">
-        <div class="sidebar-sticky">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active"  (click)="authService.goToDash()">
-                <i class="fas fa-user"></i>Projects
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active"  (click)="authService.goToProjectHome()">
-                <i class="fas fa-folder-open"></i>{{selectedProject}}
-              </a>
-            </li>
-            <!-- Calling SignOut() Api from AuthService -->
-            <li class="nav-item">
-              <a class="nav-link" (click)="authService.SignOut()">
-                <i class="fas fa-sign-out-alt"></i>Log out
-              </a>
-            </li>
-          </ul>
+    <nav class="col-md-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active"  (click)="authService.goToDash()">
+              <i class="fas fa-user"></i>Projects
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active"  (click)="authService.goToProjectHome()">
+              <i class="fas fa-folder-open"></i>{{selectedProject}}
+            </a>
+          </li>
+          <!-- Calling SignOut() Api from AuthService -->
+          <li class="nav-item">
+            <a class="nav-link" (click)="authService.SignOut()">
+              <i class="fas fa-sign-out-alt"></i>Log out
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="inner-adjust">
+
+        <div class="pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Student List</h1>
         </div>
-      </nav>
 
-      <!-- Main content -->
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-        <div class="inner-adjust">
-
-          <div class="pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">Student List</h1>
-          </div>
-
-          <table class="table table-bordered table-hover table-fixed table-responsive-md btn-table">
-            <thead>
-              <tr>
-                <th scope="col">Student</th>
-                <th scope="col">Document</th>
-                <th scope="col" style="width:10%">OLS test</th>
-                <th scope="col" style="width:10%">Tickets</th>
-                <th scope="col">Mid-term check</th>
-                <th scope="col">Final check</th>
-                <th scope="col" style="width:10%">Tickets</th>
-                <th scope="col"style="width:10%">OLS test</th>
-                <th scope="col"style="width:10%">Report</th>
-              </tr>
-            </thead>
-            <tbody>
+        <table class="table table-bordered table-hover table-fixed table-responsive-md btn-table">
+          <thead>
+            <tr>
+              <th scope="col">Student</th>
+              <th scope="col">Document</th>
+              <th scope="col" style="width:10%">OLS test</th>
+              <th scope="col" style="width:10%">Tickets</th>
+              <th scope="col">Mid-term check</th>
+              <th scope="col">Final check</th>
+              <th scope="col" style="width:10%">Tickets</th>
+              <th scope="col"style="width:10%">OLS test</th>
+              <th scope="col"style="width:10%">Report</th>
+            </tr>
+          </thead>
+          <tbody>
 
 
 
-            <tr *ngFor="let student of students">
-              <th scope="row"><button type="button" class="btn btn-outline-dark" (click)="openModal(student)">{{student}}</button>
+          <tr *ngFor="let student of students">
+            <th scope="row"><button type="button" class="btn btn-outline-dark" (click)="openModal(student)">{{student}}</button>
 
-                <!-- First Modal-->
-                <div class="backdrop" [ngStyle]="{'display':display}">
-                </div>
-                <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                          <h4 class="modal-title">{{nome}}</h4>
-                          <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
-                      </div>
-                      <div class="modal-body">
-                        <p>email: {{email}} <span class="btn btn-space"></span></p>
-                        <p>contact: {{contact}} <span class="btn btn-space"></span></p>
-                        <span class="input-group-btn input-space"></span>
-                      </div>
-                      <div class="modal-footer">
-                        <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
-                        <button class="btn btn-outline-dark" (click)="closeAndOpen()">Edit</button>
+              <!-- First Modal-->
+              <div class="backdrop" [ngStyle]="{'display':display}">
+              </div>
+              <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{{nome}}</h4>
+                        <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                      <p>email: {{email}} <span class="btn btn-space"></span></p>
+                      <p>contact: {{contact}} <span class="btn btn-space"></span></p>
+                      <span class="input-group-btn input-space"></span>
+                    </div>
+                    <div class="modal-footer">
+                      <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
+                      <button class="btn btn-outline-dark" (click)="closeAndOpen()">Edit</button>
 
-                          <!-- Edit modal-->
-                          <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display1}">
-                            <div class="modal-lg modal-dialog modal-dialog-centered" style ="width: 30%" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title">{{nome}}</h4>
-                                    <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
-                                </div>
-                                <div class="modal-body">
-                                  <p>email: <input type="text" class="form-contol" #input value={{email}}><span class="btn btn-space"></span></p>
-                                  <p>contact: <input type="text" class="form-contol" #input2 value={{contact}}><span class="btn btn-space"></span></p>
-                                  <span class="input-group-btn input-space"> </span>
-                                </div>
-                                <div class="modal-footer">
-                                  <button class="btn btn-primary" (click)="onCloseNewModal()">Close</button>
-                                  <button class="btn btn-outline-dark" (click)="modifiedField(input.value,input2.value,nome)"(click)="onCloseNewModal()">Save</button>
-                                </div>
+                        <!-- Edit modal-->
+                        <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display1}">
+                          <div class="modal-lg modal-dialog modal-dialog-centered" style ="width: 30%" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                  <h4 class="modal-title">{{nome}}</h4>
+                                  <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                              </div>
+                              <div class="modal-body">
+                                <p>email: <input type="text" class="form-contol" #input value={{email}}><span class="btn btn-space"></span></p>
+                                <p>contact: <input type="text" class="form-contol" #input2 value={{contact}}><span class="btn btn-space"></span></p>
+                                <span class="input-group-btn input-space"> </span>
+                              </div>
+                              <div class="modal-footer">
+                                <button class="btn btn-primary" (click)="onCloseNewModal()">Close</button>
+                                <button class="btn btn-outline-dark" (click)="modifiedField(input.value,input2.value,nome)"(click)="onCloseNewModal()">Save</button>
+                              </div>
 
-                              </div><!-- /.edit modal-content -->
-                            </div><!-- /.edit modal-dialog -->
-                          </div><!-- /.edit modal !-->
-                          <!--end Edit modal-->
-
-
-                      </div>
-                    </div><!-- /.modal-content -->
-                  </div><!-- /.modal-dialog -->
-                </div><!-- /.modal !-->
+                            </div><!-- /.edit modal-content -->
+                          </div><!-- /.edit modal-dialog -->
+                        </div><!-- /.edit modal !-->
+                        <!--end Edit modal-->
 
 
-              </th>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal !-->
+              <!-- end modal-->
 
-                <td>
-                  <!--button type="button" class="btn btn-outline-dark"--><!--/button-->
-                  <button type="button" class="btn btn-outline-dark">Download</button>
-                </td>
-
-                <td>
-                  <button class="btn btn-outline-dark btn-space"(click)="changeValueOls1(student)"id="{{'ols1'+student}}">
-                  </button>
-                </td>
+            </th>
+              <td><div class="col text-center"> <button type="button" class="btn btn-outline-dark">Download</button></div></td>
+              <td><div class="col text-center" > <button type="button" class="btn btn-outline-dark btn-space" style="width: 110px" (click)="changeValueOls1(student)"id="{{'ols1'+student}}"></button></div></td>
 
                 <th scope="row"><button type="button" class="btn btn-outline-dark" (click)="openModalUpload(student)" id="{{'departureTicketUploadButton' + student}}">Upload</button>
 
@@ -155,17 +147,16 @@
 
                 </th>
 
-                <td><button type="button" class="btn btn-outline-dark">View</button></td>
-                <td><button type="button" class="btn btn-outline-dark">Upload</button></td>
-                <td></td>
-                <td><button type="button" class="btn btn-outline-dark"(click)="changeValueOls2(student)" id="{{'ols2'+student}}" ></button></td>
-                <td><button type="button" class="btn btn-outline-dark"(click)="changeValueReport(student)" id="{{'report'+student}}" ></button></td>
-              </tr>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 70px" >View</button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 70px" >View</button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 80px" >Upload</button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 110px" (click)="changeValueOls2(student)" id="{{'ols2'+student}}" ></button></div></td>
+                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 110px" (click)="changeValueReport(student)" id="{{'report'+student}}"></button></div></td>
+            </tr>
 
           </tbody>
         </table>
         <button type="button" class="btn btn-outline-dark" (click)="openModalNewStudent()"><i class="fas fa-user"></i>New Student</button>
-
 
 
         <!--New Student-->
@@ -193,7 +184,6 @@
 
 
         </div>
-
       </main>
 
     </div>
