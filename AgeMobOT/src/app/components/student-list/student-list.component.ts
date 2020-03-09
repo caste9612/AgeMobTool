@@ -187,82 +187,75 @@ export class StudentListComponent implements OnInit , AfterViewInit{
         });
     };
 
-    modifiedField(input,input2,student){
+  modifiedField(input,input2,student){
 
-      this.dataService.getProva().collection('Students').doc('/' + student).update({email: input})
+    this.dataService.getProva().collection('Students').doc('/' + student).update({email: input})
 
-      this.dataService.getProva().collection('Students').doc('/' + student).update({contact: input2})
+    this.dataService.getProva().collection('Students').doc('/' + student).update({contact: input2})
 
-    }
-
-    
-
-    changeValueOls1(student){
+}
 
 
-      this.dataService.getProva().collection('Students').doc('/' + student).update({ols1: 'green'}).then(() => {
-        console.log('done');
-      })
-      .catch(function(error) {
-      console.error('Error writing document: ', error);
-      });
+
+changeValueOls1(student){
+
+  this.dataService.getProva().collection('Students').doc('/' + student).update({ols1: 'green'}).then(() => {
+  console.log('done');
+  })
+  .catch(function(error) {
+  console.error('Error writing document: ', error);
+  });
+}
+
+changeValueOls2(student){
+
+  this.dataService.getProva().collection('Students').doc('/' + student).update({ols2: 'green'}).then(() => {
+  console.log('done');
+  })
+  .catch(function(error) {
+  console.error('Error writing document: ', error);
+  });
+}
+
+changeValueReport(student){
+
+  this.dataService.getProva().collection('Students').doc('/' + student).update({report: 'green'}).then(() => {
+  console.log('done');
+  })
+  .catch(function(error) {
+  console.error('Error writing document: ', error);
+  });
+}
 
 
-    }
+openModalNewStudent(){
+  this.display2 = 'block';
+}
 
-    changeValueOls2(student){
+onCloseModalNewStudent(){
+  this.display2 = 'none';
+}
 
-      this.dataService.getProva().collection('Students').doc('/' + student).update({ols2: 'green'}).then(() => {
-        console.log('done');
-      })
-      .catch(function(error) {
-      console.error('Error writing document: ', error);
-      });
-    }
+addStudent(studentName){
 
-    changeValueReport(student){
+  // Add a new document in collection "students"
+  const stud= this.dataService.student.doc(studentName);
 
-      this.dataService.getProva().collection('Students').doc('/' + student).update({report: 'green'}).then(() => {
-        console.log('done');
-      })
-      .catch(function(error) {
-      console.error('Error writing document: ', error);
-      });
-    }
+  stud.set({
 
-
-    openModalNewStudent(){
-      this.display2 = 'block';
-      
-    }
-
-    onCloseModalNewStudent(){
-      this.display2 = 'none';
-    }
-
-    addStudent(studentName){
-
-      // Add a new document in collection "students"
-       const stud= this.dataService.student.doc(studentName);
-
-       stud.set({
-
-        ols1: 'red',
-        ols2: 'red',
-        email: '',
-        contact: '',
-        report: 'red'
-           //setsomevalue
-
-       })
-       .then(function() {
-           console.log("Document successfully written!");
-       })
-       .catch(function(error) {
-           console.error("Error writing document: ", error);
-       });
-   };
-
-
+    ols1: 'red',
+    ols2: 'red',
+    email: '',
+    contact: '',
+    report: 'red'
+    //setsomevalue
+  })
+  .then(function() {
+  console.log("Document successfully written!");
+  })
+  .catch(function(error) {
+  console.error("Error writing document: ", error);
+  });
+  };
 }
 

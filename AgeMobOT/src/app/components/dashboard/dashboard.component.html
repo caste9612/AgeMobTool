@@ -1,5 +1,5 @@
-<!-- Top navigation -->
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+<!-- Top navigation navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow"-->
+<nav class="navbar fixed-top ">
   <a>
     <img class="brand-logo" src="assets/LOGO.png" alt="AgeMob Logo" style="height: 60px;">
     <span class="dasboard-text">Dashboard</span>
@@ -7,8 +7,7 @@
 </nav>
 
 
-
-<!-- Sidebar navigation -->
+<!-- Sidebar navigation  bg-light sidebar-->
 <div class="container-fluid">
   <div class="row">
 
@@ -17,7 +16,7 @@
         <ul class="nav flex-column">
           <li class="nav-item">
             <a class="nav-link active">
-              <i class="fas fa-user"></i>Projects
+              <i class="fas fa-plane" ></i>Projects
             </a>
           </li>
           <!-- Calling SignOut() Api from AuthService -->
@@ -35,15 +34,15 @@
       <div class="inner-adjust">
 
         <div class="pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">Projects</h1>
+          <h1 class="h2"><i class="fas fa-plane" ></i> Projects</h1>
         </div>
 
         <div>
-          <button type="button" class="btn btn-primary btn-lg btn-block" (click)="this.goToSelectedProject(project)" *ngFor="let project of projects" style="height: 100px;">{{project}}</button>
+          <button type="button" class="button btn-lg btn-block" (click)="this.goToSelectedProject(project)" *ngFor="let project of projects" style="height: 100px;"> {{project}}</button>
           <!-- <-->
           <!-- open a modal window by clicking button  basic bootstrap-->
 
-          <button type="button" class="btn btn-primary btn-lg btn-block"  (click)="openModal()">Add new project</button>
+          <button type="button" class="button1 " (click)="openModal()"><i class="fas fa-plus"></i></button>
           <div class="backdrop" [ngStyle]="{'display':display}">
           </div>
           <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
@@ -54,11 +53,11 @@
                   <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
                </div>
                <div class="modal-body">
-                <p>Add project code:<input type="text" class="form-contol" #input> <span class="btn btn-space"><button class="btn btn-primary" (click)="getData(input.value)"><i class="fas fa-file-import"></i>Import data</button></span></p>
+                <p>Add project code:<input type="text" class="form-contol" #input> <span class="btn btn-space"><button class="btnSave" (click)="getData(input.value)"><i class="fas fa-file-import"></i>Import data</button></span></p>
               </div>
                 <div class="modal-footer">
-                  <button class="btn btn-primary" (click)="onCloseHandled()"><i class="fas fa-times"></i>Close</button>
-                  <button class="btn btn-primary" (click)="addProject(input.value)" (click)="onCloseHandled()"><i class="fas fa-check"></i>Save</button>
+                  <button class="btnSave" (click)="onCloseHandled()"><i class="fas fa-times"></i>Close</button>
+                  <button class="btnSave" (click)="addProject(input.value)" (click)="onCloseHandled()"><i class="fas fa-check"></i>Save</button>
                </div>
              </div><!-- /.modal-content -->
            </div><!-- /.modal-dialog -->

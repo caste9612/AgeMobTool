@@ -10,16 +10,8 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
- //styleUrls: ['./dashboard.component.css']
- styles: [`
- .backdrop{
-   background-color:rgba(0,0,0,0.4);
-   position:fixed;
-   top:0;
-   left:0;
-   width:100%;
-   height:100vh;
-   }`]
+  styleUrls: ['./dashboard.component.css']
+ 
 })
 
 export class DashboardComponent implements OnInit {

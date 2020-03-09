@@ -1,3 +1,72 @@
 .btn-space {
     margin-right: 20px;
 }
+.button {
+    background-color: rgba(172, 39, 39, 0.966); 
+    border: rgb(6, 1, 10);
+    color:rgb(255, 255, 255);
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 26px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+.button1 {
+  background-color: rgba(172, 39, 39, 0.966); 
+  border-radius :50%;
+  border: rgb(10, 4, 15);
+  color:rgb(20, 4, 32);
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: auto;
+  cursor: pointer;
+  position: absolute;
+  left: 48%;
+}
+
+.button:hover{
+  background-image:none;
+  background-color: rgba(139, 35, 35, 0.966); 
+}
+
+.button1:hover{
+background-image:none;
+background-color: rgba(139, 35, 35, 0.966); 
+}
+
+.btnSave{
+  border-radius: 5%;
+  border: 1px solid rgba(170, 165, 165, 0.966);
+  background-color:  rgba(170, 165, 165, 0.966);
+  font-size: 18px;
+}
+.btnSave:hover{
+  background-color: rgba(99, 99, 99, 0.966);
+}
+.backdrop{
+  background-color:rgba(0,0,0,0.4);
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100vh;
+  }
+
+.navbar{
+background-color: rgb(250, 250, 250);
+border-color: 10px solid rgb(8, 8, 8);
+color: black;
+
+
+}
+.dasboard-text{
+  color: rgb(99, 96, 96);
+  font-size: 130%;
+  }
+
