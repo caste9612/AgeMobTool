@@ -7,6 +7,10 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ConditionalExpr } from '@angular/compiler';
 import { tick } from '@angular/core/testing';
+import { stringify } from 'querystring';
+
+
+
 
 
 @Component({
@@ -30,6 +34,7 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   display1 = 'none';
   displayUpload = 'none';
   displayDownloadDepartureTicket = 'none';
+  displayCredential = 'none';
   departureTicketUrl: string;
   columns: string[] = [];
   rows: number[] = [];
@@ -45,7 +50,15 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   selectedProject;
   input;
 
+  emailLogIn;
+  password;
+
   nome ;
+
+  messages = [];
+
+
+
 
   ngOnInit() {
 
@@ -71,28 +84,28 @@ export class StudentListComponent implements OnInit , AfterViewInit{
 
         document.getElementById('ols1'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().ols1;
 
-        if(element.payload.doc.data().ols1==='green'){
+        if(element.payload.doc.data().ols1==='lightgreen'){
           document.getElementById('ols1'+element.payload.doc.id).textContent = 'Verified';
         }
         else if (element.payload.doc.data().ols1==='yellow'){
           document.getElementById('ols1'+element.payload.doc.id).textContent = 'Waiting';
         }
         else{
-          document.getElementById('ols1'+element.payload.doc.id).textContent = 'Not loaded';
+          document.getElementById('ols1'+element.payload.doc.id).textContent = 'Miss';
 
         }
 
 
         document.getElementById('ols2'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().ols2;
 
-        if(element.payload.doc.data().ols2==='green'){
+        if(element.payload.doc.data().ols2==='lightgreen'){
           document.getElementById('ols2'+element.payload.doc.id).textContent = 'Verified';
         }
-        else if (element.payload.doc.data().ols2==='yellow'){
+        else if (element.payload.doc.data().ols2 ==='yellow'){
           document.getElementById('ols2'+element.payload.doc.id).textContent = 'Waiting';
         }
         else{
-          document.getElementById('ols2'+element.payload.doc.id).textContent = 'Not loaded';
+          document.getElementById('ols2'+element.payload.doc.id).textContent = 'Miss';
 
         }
 
@@ -102,7 +115,7 @@ export class StudentListComponent implements OnInit , AfterViewInit{
           document.getElementById('report'+element.payload.doc.id).textContent = 'Done';
 
         }else{
-          document.getElementById('report'+element.payload.doc.id).textContent = 'Not loaded';
+          document.getElementById('report'+element.payload.doc.id).textContent = 'Miss';
 
         }
 
@@ -111,6 +124,22 @@ export class StudentListComponent implements OnInit , AfterViewInit{
         }else{
           document.getElementById('departureTicketUploadButton' + element.payload.doc.id).style.backgroundColor = 'white';
         }
+        if (element.payload.doc.data().returnTicket ==='Uploaded') {
+          document.getElementById('returnTicketUploadButton' + element.payload.doc.id).style.backgroundColor = 'lightgreen';
+        }else{
+          document.getElementById('returnTicketUploadButton' + element.payload.doc.id).style.backgroundColor = 'white';
+        }
+
+        this.dataService.getUsers().subscribe(
+          users => users.forEach(
+            user => {
+              if (user.payload.doc.data().student === element.payload.doc.id){
+               document.getElementById('credentialButton' + element.payload.doc.id).style.backgroundColor = '#343a40';
+               document.getElementById('credentialButton' + element.payload.doc.id).style.color = 'white';
+              }
+            }
+          )
+        );
       })
       );
   }
@@ -126,9 +155,12 @@ export class StudentListComponent implements OnInit , AfterViewInit{
     this.display = 'none';
     this.displayUpload = 'none';
     this.displayDownloadDepartureTicket = 'none';
+    this.displayCredential = 'none';
   }
 
   openModal(student){
+    this.messages.length = 0;
+
     this.display='block';
     this.nome = student;
 
@@ -138,30 +170,68 @@ export class StudentListComponent implements OnInit , AfterViewInit{
           this.email = studentG.payload.doc.data().email;
           this.contact = studentG.payload.doc.data().contact;
         }
-      }))
+    }));
+
+    this.dataService.getUsers().subscribe(
+      users => users.forEach(
+        user => {
+          if (user.payload.doc.data().student === student){
+            this.dataService.getMessageList(user.payload.doc.id).subscribe(
+              messages => messages.forEach(
+                message => {
+                  this.messages.push(message.payload.doc.data().text);
+                }
+              )
+            )
+          }
+        }
+      )
+    );
  }
 
- openModalUpload(student) {
+
+
+ openModalUpload(student,action) {
 
   this.displayUpload = 'block';
   this.nome = student;
   this.dataService.uploadingStudent = student;
+  this.dataService.actionUpload = action;
   this.dataService.getStudentTicketsFolder().snapshotChanges().subscribe(
     tickets => tickets.forEach(ticket => {
-      if (ticket.payload.doc.id === 'departure') {
+      if (ticket.payload.doc.id === action) {
         this.dataService.downloadURL = ticket.payload.doc.data().downloadURL;
         this.departureTicketUrl = ticket.payload.doc.data().downloadURL;
         this.displayDownloadDepartureTicket = 'flex';
       }
     })
   )
-}
+  }
+
+  getUserCredential(student: string){
+    this.displayCredential = 'block';
+
+    this.dataService.getStudentList().subscribe(
+      studentList => studentList.forEach(studentG => {
+        if(studentG.payload.doc.id===student){
+          this.email = student.replace(/\s/g,'').toLowerCase() + "@agemob.com";
+          this.contact = studentG.payload.doc.data().contact;
+          this.nome = student;
+        }
+      }))
+  }
+
+  generateCredential(psw){
+    this.authService.SignUp(this.email, psw, this.dataService.selectedProject, this.dataService.selectedCountry,
+       this.dataService.selectedDestination, this.dataService.selectedDate, this.nome);
+  }
+
 
 
 
  closeAndOpen(){
   this.display1='block';
-  
+
  }
  onCloseNewModal(){
   this.display1='none';
@@ -236,17 +306,17 @@ onCloseModalNewStudent(){
   this.display2 = 'none';
 }
 
-addStudent(studentName){
+addStudent(studentName, mail, number){
 
   // Add a new document in collection "students"
-  const stud= this.dataService.student.doc(studentName);
+  const stud= this.dataService.getStudentListReference().doc(studentName);
 
   stud.set({
 
     ols1: 'red',
     ols2: 'red',
-    email: '',
-    contact: '',
+    email: mail,
+    contact: number,
     report: 'red'
     //setsomevalue
   })
@@ -257,5 +327,12 @@ addStudent(studentName){
   console.error("Error writing document: ", error);
   });
   };
+
+  sendNotification(student:string, type:string){
+    console.log("notifica a " + student + " " + type);
+    this.dataService.addMessage(student, type);
+  }
 }
+
+
 

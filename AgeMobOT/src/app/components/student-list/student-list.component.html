@@ -44,6 +44,7 @@
           <h1 class="h2"><i class="fas fa-user"></i> Student List</h1>
         </div>
 
+
         <table class="table1">
           <thead>
             <tr>
@@ -63,7 +64,39 @@
 
 
             <tr *ngFor="let student of students">
-              <td><button type="button" class="btnName btn-outline-dark btn-outline-dark" (click)="openModal(student)">{{student}}</button></td>
+
+              <td style="padding: 0px;width: 200px;">
+                <div  style="display: flex;flex-direction: row;">
+                  <button type="button" class="btn btn-outline-dark fas fa-user-cog" (click)="getUserCredential(student)" style="padding: 5px;" id="{{'credentialButton' + student}}"></button>
+                  <button type="button" class="btnName btn-outline-dark btn-outline-dark" (click)="openModal(student)">{{student}}</button>
+                </div>
+              </td>
+
+              <div class="backdrop" [ngStyle]="{'display':displayCredential}">
+              </div>
+              <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayCredential}">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title">User Credential</h4>
+                      <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+                      <p>username: {{email}} <span class="btn btn-space"></span></p>
+                      <p>password: {{password}} <span class="btn btn-space"></span>
+                        <input type="text" class="form-contol" #inputPsw value={{password}}><span class="btn btn-space"></span>
+                      </p>
+                      <p>
+                        <button type="button" class="btn btn-outline-dark " (click)="generateCredential(inputPsw.value)">Generate</button>
+                      </p>
+
+                    </div>
+                    <div class="modal-footer" style="justify-content: space-between;">
+                      <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+              </div><!-- /.modal !-->
 
                 <!-- First Modal-->
                 <div class="backdrop" [ngStyle]="{'display':display}">
@@ -78,6 +111,15 @@
                       <div class="modal-body">
                         <p>email: {{email}} <span class="btn btn-space"></span></p>
                         <p>contact: {{contact}} <span class="btn btn-space"></span></p>
+                        <div class="panel panel-primary" id="result_panel">
+                            <div class="panel-heading"><h4 class="panel-title">Notification History</h4>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group">
+                                    <li class="list-group-item" *ngFor = 'let message of messages' style="border: solid 2px;"><strong>{{message}}</strong></li>
+                                </ul>
+                            </div>
+                        </div>
                         <span class="input-group-btn input-space"></span>
                       </div>
                       <div class="modal-footer">
@@ -114,11 +156,27 @@
                 </div><!-- /.modal !-->
                 <!-- end modal-->
 
-              
-                <td><div class="col text-center"> <button type="button" class="btnDUV ">Download</button></div></td>
-                <td><div class="col text-center" > <button type="button" class="btn btn-outline-dark btn-space" style="width: 110%" (click)="changeValueOls1(student)"id="{{'ols1'+student}}"></button></div></td>
 
-                <td><div class="col text-center"> <button type="button" class="btnDUV" (click)="openModalUpload(student)" id="{{'departureTicketUploadButton' + student}}">Upload</button></div>
+                <td><div class="col text-center">
+                  <div style="display: flex;flex-direction: row;">
+                    <button type="button" class="btnDUV ">Download</button>
+                  <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'document')"></button>
+                </div>
+              </div></td>
+
+                <td><div class="col text-center" >
+                  <div style="display: flex;flex-direction: row;">
+                    <button type="button" class="btn btn-outline-dark btn-space" style="width: 110%" (click)="changeValueOls1(student)"id="{{'ols1'+student}}"></button>
+                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'ols1')"></button>
+                  </div>
+                  </div></td>
+
+                <td><div class="col text-center">
+                      <div style="display: flex;flex-direction: row;">
+                        <button type="button" class="btnDUV" (click)="openModalUpload(student,'departure')" id="{{'departureTicketUploadButton' + student}}">Upload</button>
+                        <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'departureTicket')"></button>
+                      </div>
+                  </div>
 
                   <div class="backdrop" [ngStyle]="{'display':displayUpload}">
                   </div>
@@ -148,18 +206,90 @@
 
                 </td>
 
-                <td> <div class="col text-center"> <button type="button" class="btnDUV " style="width: 70px" >View</button></div></td>
-                <td> <div class="col text-center"> <button type="button" class="btnDUV " style="width: 70px" >View</button></div></td>
-                <td> <div class="col text-center"> <button type="button" class="btnDUV " style="width: 80px" >Upload</button></div></td>
-                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 110px" (click)="changeValueOls2(student)" id="{{'ols2'+student}}" ></button></div></td>
-                <td> <div class="col text-center"> <button type="button" class="btn btn-outline-dark" style="width: 110px" (click)="changeValueReport(student)" id="{{'report'+student}}"></button></div></td>
-              
+                <td>
+                  <div class="col text-center">
+                    <div style="display: flex;flex-direction: row;">
+                      <button type="button" class="btnDUV " style="width: 70px" >View</button>
+                      <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'mid-term')"></button>
+                    </div>
+                  </div>
+                </td>
+                <td> <div class="col text-center">
+                  <div style="display: flex;flex-direction: row;">
+                    <button type="button" class="btnDUV " style="width: 80px" >View</button>
+                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'final')"></button>
+                  </div>
+                </div></td>
+
+
+
+
+
+
+
+                <td><div class="col text-center">
+                  <div style="display: flex;flex-direction: row;">
+                    <button type="button" class="btnDUV" (click)="openModalUpload(student,'return')" id="{{'returnTicketUploadButton' + student}}">Upload</button>
+                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'returnTicket')"></button>
+                  </div>
+              </div>
+
+              <div class="backdrop" [ngStyle]="{'display':displayUpload}">
+              </div>
+              <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayUpload}">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title">Upload Document</h4>
+                      <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                  </div>
+                  <div class="modal-body">
+
+                    <uploader></uploader>
+
+
+                  </div>
+                    <div class="modal-footer" style="justify-content: space-between;">
+                      <button type="button" class="btn btn-outline-dark" [ngStyle]="{'display':displayDownloadDepartureTicket}">
+                        <a [href]="departureTicketUrl" target="_blank" rel="noopener">Download</a>
+                      </button>
+                      <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+              </div><!-- /.modal !-->
+
+
+            </td>
+
+
+
+
+
+
+
+                <td> <div class="col text-center">
+                  <div style="display: flex;flex-direction: row;">
+                    <button type="button" class="btn btn-outline-dark" style="width: 80px" (click)="changeValueOls2(student)" id="{{'ols2'+student}}" ></button>
+                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'ols2')"></button>
+                  </div>
+                  </div></td>
+                <td> <div class="col text-center">
+                  <div style="display: flex;flex-direction: row;">
+                  <button type="button" class="btn btn-outline-dark" style="width: 80px" (click)="changeValueReport(student)" id="{{'report'+student}}"></button>
+                  <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'report')"></button>
+                  </div>
+                </div></td>
+
             </tr>
 
           </tbody>
       </table>
+
+
+
       <p></p>
-      <button type="button" class="btnNew" (click)="openModalNewStudent()"><i class="fas fa-user"></i>New Student</button>
+      <button type="button" class="btn btn-outline-dark" (click)="openModalNewStudent()"><i class="fas fa-user-plus"></i>New Student</button>
 
 
       <!--New Student-->
@@ -173,11 +303,13 @@
                 <button type="button" class="close" aria-label="Close"  (click)="onCloseModalNewStudent()"> <span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-              <p>Name: <input type="text" class="form-contol" #input> <span class="btn btn-space"> </span></p>
+              <p style="display: flex;justify-content: space-between;">Name: <input type="text" class="form-contol" #input style="width: 80%;"> </p>
+              <p style="display: flex;justify-content: space-between;">Email:<input type="text" class="form-contol" #input1 style="width: 80%;"> </p>
+              <p style="display: flex;justify-content: space-between;">Number: <input type="text" class="form-contol" #input2 style="width: 80%;"></p>
             </div>
             <div class="modal-footer">
               <button class="btnSave" (click)="onCloseModalNewStudent()">Close</button>
-              <button class="btnSave" (click)="onCloseModalNewStudent()"(click)="addStudent(input.value)">Save</button>
+              <button class="btnSave" (click)="onCloseModalNewStudent()"(click)="addStudent(input.value, input1.value, input2.value)">Save</button>
             </div>
 
           </div><!-- /.modal-content -->

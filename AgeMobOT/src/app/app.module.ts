@@ -39,6 +39,7 @@ import { ProjectTreeComponent } from './components/projectTree/projectTree.compo
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { UploadTaskComponent } from './components/upload-task/upload-task.component';
 import { UploaderComponent } from './components/uploader/uploader.component';
+import { NgForOf, NgIf } from '@angular/common';
 
 
 @NgModule({
@@ -63,7 +64,7 @@ import { UploaderComponent } from './components/uploader/uploader.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     ReactiveFormsModule,
-    TreeModule
+    TreeModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

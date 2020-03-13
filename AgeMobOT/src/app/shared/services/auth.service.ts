@@ -1,5 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { User } from "../services/user";
+import { UserData } from "../services/user";
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
@@ -41,8 +42,8 @@ export class AuthService {
         });
         this.SetUserData(result.user);
       }).catch((error) => {
-        window.alert(error.message)
-      })
+        window.alert(error.message);
+      });
   }
 
   goToDash() {
@@ -54,17 +55,18 @@ export class AuthService {
   }
 
   // Sign up with email/password
-  SignUp(email, password) {
+  SignUp(email, password, project: string, country: string, destination: string, date: string, student: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         /* Call the SendVerificaitonMail() function when new user sign
         up and returns promise */
-        this.SendVerificationMail();
-        this.SetUserData(result.user);
+        //this.SendVerificationMail();
+        this.SetUserDataUser(result.user, project, country, destination, date, student);
       }).catch((error) => {
-        window.alert(error.message)
-      })
+        window.alert(error.message);
+      });
   }
+
 
   // Send email verfificaiton when new user sign up
   SendVerificationMail() {
@@ -80,19 +82,17 @@ export class AuthService {
     .then(() => {
       window.alert('Password reset email sent, check your inbox.');
     }).catch((error) => {
-      window.alert(error)
-    })
+      window.alert(error);
+    });
   }
 
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
+    //con mail di verifica, si verificano solo quelle che vogliamo
     return (user !== null && user.emailVerified !== false) ? true : false;
-  }
-
-  // Sign in with Google
-  GoogleAuth() {
-    return this.AuthLogin(new auth.GoogleAuthProvider());
+    //senza
+    //return (user !== null) ? true : false;
   }
 
   // Auth logic to run auth providers
@@ -101,12 +101,14 @@ export class AuthService {
     .then((result) => {
        this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
-        })
-      this.SetUserData(result.user);
+        });
+       this.SetUserData(result.user);
     }).catch((error) => {
-      window.alert(error)
-    })
+      window.alert(error);
+    });
   }
+
+
 
   /* Setting up user data when sign in with username/password,
   sign up with username/password and sign in with social auth
@@ -118,11 +120,36 @@ export class AuthService {
       email: user.email,
       displayName: user.displayName,
       photoURL: user.photoURL,
-      emailVerified: user.emailVerified
-    }
+      emailVerified: user.emailVerified,
+    };
     return userRef.set(userData, {
       merge: true
-    })
+    });
+  }
+
+  SetUserDataUser(user, project: string, country: string, destination: string, date: string, student: string) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userData: UserData = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+      project: user.project,
+      country: user.country,
+      destination: user.destination,
+      date: user.date,
+      student: user.student,
+    };
+    userData.project = project;
+    userData.country = country;
+    userData.destination = destination;
+    userData.date = date;
+    userData.student =  student;
+    userData.emailVerified = true;
+    return userRef.set(userData, {
+      merge: true
+    });
   }
 
   // Sign out
@@ -130,7 +157,7 @@ export class AuthService {
     return this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem('user');
       this.router.navigate(['sign-in']);
-    })
+    });
   }
 
 }

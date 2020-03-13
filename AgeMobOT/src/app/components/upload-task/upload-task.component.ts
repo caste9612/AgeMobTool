@@ -47,13 +47,25 @@ export class UploadTaskComponent implements OnInit {
       finalize( async() =>  {
         this.downloadURL = await ref.getDownloadURL().toPromise();
 
-        this.dataService.getStudentTicketsFolder().doc('departure').set( { downloadURL: this.downloadURL, path });
-        this.dataService.student.doc(this.dataService.uploadingStudent).update({departureTicket: 'Uploaded'}).then(() => {
-          console.log('done');
-        })
-        .catch(function(error) {
-        console.error('Error writing document: ', error);
-        });      }),
+        if(this.dataService.actionUpload === 'departure'){
+          this.dataService.getStudentTicketsFolder().doc('departure').set( { downloadURL: this.downloadURL, path });
+          this.dataService.student.doc(this.dataService.uploadingStudent).update({departureTicket: 'Uploaded'}).then(() => {
+            console.log('done');
+          })
+          .catch(function(error) {
+          console.error('Error writing document: ', error);
+          });
+        }
+        if(this.dataService.actionUpload === 'return'){
+          this.dataService.getStudentTicketsFolder().doc('return').set( { downloadURL: this.downloadURL, path });
+          this.dataService.student.doc(this.dataService.uploadingStudent).update({returnTicket: 'Uploaded'}).then(() => {
+            console.log('done');
+          })
+          .catch(function(error) {
+          console.error('Error writing document: ', error);
+          });
+        }
+      }),
     );
   }
 
