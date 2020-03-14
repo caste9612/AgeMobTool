@@ -160,21 +160,21 @@
                 <td><div class="col text-center">
                   <div style="display: flex;flex-direction: row;">
                     <button type="button" class="btnDUV ">Download</button>
-                  <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'document')"></button>
+                  <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi caricare le foto dei tuoi documenti')"></button>
                 </div>
               </div></td>
 
                 <td><div class="col text-center" >
                   <div style="display: flex;flex-direction: row;">
                     <button type="button" class="btn btn-outline-dark btn-space" style="width: 110%" (click)="changeValueOls1(student)"id="{{'ols1'+student}}"></button>
-                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'ols1')"></button>
+                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi fare il test ols')"></button>
                   </div>
                   </div></td>
 
                 <td><div class="col text-center">
                       <div style="display: flex;flex-direction: row;">
                         <button type="button" class="btnDUV" (click)="openModalUpload(student,'departure')" id="{{'departureTicketUploadButton' + student}}">Upload</button>
-                        <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'departureTicket')"></button>
+                        <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'sono stati caricati i biglietti di andata')"></button>
                       </div>
                   </div>
 
@@ -210,14 +210,14 @@
                   <div class="col text-center">
                     <div style="display: flex;flex-direction: row;">
                       <button type="button" class="btnDUV " style="width: 70px" >View</button>
-                      <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'mid-term')"></button>
+                      <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi inviare la prima ruota del tirocinio')"></button>
                     </div>
                   </div>
                 </td>
                 <td> <div class="col text-center">
                   <div style="display: flex;flex-direction: row;">
                     <button type="button" class="btnDUV " style="width: 80px" >View</button>
-                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'final')"></button>
+                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi inviare la seconda ruota del tirocinio')"></button>
                   </div>
                 </div></td>
 
@@ -230,7 +230,7 @@
                 <td><div class="col text-center">
                   <div style="display: flex;flex-direction: row;">
                     <button type="button" class="btnDUV" (click)="openModalUpload(student,'return')" id="{{'returnTicketUploadButton' + student}}">Upload</button>
-                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'returnTicket')"></button>
+                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'sono stati caricati i biglietti per il rientro')"></button>
                   </div>
               </div>
 
@@ -271,13 +271,13 @@
                 <td> <div class="col text-center">
                   <div style="display: flex;flex-direction: row;">
                     <button type="button" class="btn btn-outline-dark" style="width: 80px" (click)="changeValueOls2(student)" id="{{'ols2'+student}}" ></button>
-                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'ols2')"></button>
+                    <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'fare il test ols finale')"></button>
                   </div>
                   </div></td>
                 <td> <div class="col text-center">
                   <div style="display: flex;flex-direction: row;">
                   <button type="button" class="btn btn-outline-dark" style="width: 80px" (click)="changeValueReport(student)" id="{{'report'+student}}"></button>
-                  <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'report')"></button>
+                  <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'fare il report finale')"></button>
                   </div>
                 </div></td>
 

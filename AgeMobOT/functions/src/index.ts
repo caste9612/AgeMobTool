@@ -7,7 +7,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 
 // Listen for changes in all documents in the 'users' collection and all subcollections
-exports.useMultipleWildcards = functions.firestore
+exports.sendNotification = functions.firestore
     .document('users/{userId}/{messageCollectionId}/{messageId}')
     .onCreate((snap, context) => {
 
@@ -20,6 +20,15 @@ exports.useMultipleWildcards = functions.firestore
             if (user.id == context.params.userId){
               console.log('c e una notifica per ' + user.data().student +
               ' che dice ' + notification.text);
+            admin.firestore().collection('users').doc(context.params.userId).get().then(
+              (userData: any)  => {
+                admin.messaging().sendToDevice(userData.data().deviceToken,{notification:
+                {
+                  title: 'Messaggio da AgeMob',
+                  body: "Ricordati di fare : " + notification.text,
+                }});
+              }
+              )
             }
           })
         )
