@@ -33,6 +33,7 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   display = 'none';
   display1 = 'none';
   displayUpload = 'none';
+  displayDocumentDownload = 'none';
   displayDownloadDepartureTicket = 'none';
   displayCredential = 'none';
   departureTicketUrl: string;
@@ -56,6 +57,10 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   nome ;
 
   messages = [];
+
+  documentFront;
+  documentBack;
+
 
 
 
@@ -111,7 +116,7 @@ export class StudentListComponent implements OnInit , AfterViewInit{
 
         document.getElementById('report'+element.payload.doc.id).style.backgroundColor=element.payload.doc.data().report;
 
-        if(element.payload.doc.data().report==='green'){
+        if(element.payload.doc.data().report==='lightgreen'){
           document.getElementById('report'+element.payload.doc.id).textContent = 'Done';
 
         }else{
@@ -129,6 +134,13 @@ export class StudentListComponent implements OnInit , AfterViewInit{
         }else{
           document.getElementById('returnTicketUploadButton' + element.payload.doc.id).style.backgroundColor = 'white';
         }
+
+        if (element.payload.doc.data().front ==='accepted' && element.payload.doc.data().back ==='accepted') {
+          document.getElementById('documentButton' + element.payload.doc.id).style.backgroundColor = 'lightgreen';
+        }else{
+          document.getElementById('documentButton' + element.payload.doc.id).style.backgroundColor = 'red';
+        }
+
 
         this.dataService.getUsers().subscribe(
           users => users.forEach(
@@ -156,6 +168,8 @@ export class StudentListComponent implements OnInit , AfterViewInit{
     this.displayUpload = 'none';
     this.displayDownloadDepartureTicket = 'none';
     this.displayCredential = 'none';
+    this.displayDocumentDownload = 'none';
+
   }
 
   openModal(student){
@@ -189,6 +203,34 @@ export class StudentListComponent implements OnInit , AfterViewInit{
     );
  }
 
+ openModalDocument(student){
+   this.displayDocumentDownload = 'block';
+
+   this.documentFront = null;
+   this.documentBack = null;
+
+   this.dataService.uploadingStudent = student;
+
+   this.dataService.getStudentDocumentFolder().snapshotChanges().subscribe(
+    documents => documents.forEach(document => {
+      if (document.payload.doc.id === 'front'){
+        this.documentFront= document.payload.doc.data().downloadUrl;
+      }
+      if (document.payload.doc.id === 'back'){
+        this.documentBack= document.payload.doc.data().downloadUrl;
+      }
+    })
+  )
+}
+
+acceptDocument(student, type){
+  if(type == 'front'){
+    this.dataService.getStudentReference(this.dataService.uploadingStudent).update({front: "accepted"});
+  }
+  if(type == 'back'){
+    this.dataService.getStudentReference(this.dataService.uploadingStudent).update({back: "accepted"});
+  }
+}
 
 
  openModalUpload(student,action) {
@@ -269,7 +311,7 @@ export class StudentListComponent implements OnInit , AfterViewInit{
 
 changeValueOls1(student){
 
-  this.dataService.getProva().collection('Students').doc('/' + student).update({ols1: 'green'}).then(() => {
+  this.dataService.getProva().collection('Students').doc('/' + student).update({ols1: 'lightgreen'}).then(() => {
   console.log('done');
   })
   .catch(function(error) {
@@ -279,7 +321,7 @@ changeValueOls1(student){
 
 changeValueOls2(student){
 
-  this.dataService.getProva().collection('Students').doc('/' + student).update({ols2: 'green'}).then(() => {
+  this.dataService.getProva().collection('Students').doc('/' + student).update({ols2: 'lightgreen'}).then(() => {
   console.log('done');
   })
   .catch(function(error) {
@@ -289,7 +331,7 @@ changeValueOls2(student){
 
 changeValueReport(student){
 
-  this.dataService.getProva().collection('Students').doc('/' + student).update({report: 'green'}).then(() => {
+  this.dataService.getProva().collection('Students').doc('/' + student).update({report: 'lightgreen'}).then(() => {
   console.log('done');
   })
   .catch(function(error) {

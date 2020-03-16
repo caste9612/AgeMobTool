@@ -71,6 +71,12 @@ export class DataServiceService {
     .collection('Students');
   }
 
+  getStudentReference(student){
+    return this.projects.doc(this.selectedProject).collection('Countries').doc(this.selectedCountry)
+    .collection('Destinations').doc(this.selectedDestination).collection('Date').doc(this.selectedDate)
+    .collection('Students').doc(student);
+  }
+
   getProva() {
 
     return this.projects.doc(this.selectedProject).collection('Countries').doc(this.selectedCountry)
@@ -82,6 +88,13 @@ export class DataServiceService {
         .doc(this.selectedCountry).collection('Destinations').doc(this.selectedDestination)
         .collection('Date').doc(this.selectedDate).collection('Students').doc(this.uploadingStudent)
         .collection('tickets');
+  }
+
+  getStudentDocumentFolder() {
+    return this.projects.doc(this.selectedProject).collection('Countries')
+    .doc(this.selectedCountry).collection('Destinations').doc(this.selectedDestination)
+    .collection('Date').doc(this.selectedDate).collection('Students').doc(this.uploadingStudent)
+    .collection('document');
   }
 
   addMessage(student: string, type: string) {

@@ -157,12 +157,51 @@
                 <!-- end modal-->
 
 
-                <td><div class="col text-center">
-                  <div style="display: flex;flex-direction: row;">
-                    <button type="button" class="btnDUV ">Download</button>
-                  <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi caricare le foto dei tuoi documenti')"></button>
-                </div>
-              </div></td>
+                <td>
+                  <div class="col text-center">
+                    <div style="display: flex;flex-direction: row;">
+                      <button type="button" class="btnDUV " (click)="openModalDocument(student)" id="{{'documentButton' + student}}">Download</button>
+                      <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi caricare le foto dei tuoi documenti')"></button>
+                    </div>
+                  </div>
+
+                  <div class="backdrop" [ngStyle]="{'display':displayDocumentDownload}">
+                  </div>
+                  <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayDocumentDownload}">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                          <h4 class="modal-title">Student's document</h4>
+                          <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                      </div>
+                      <div class="modal-body">
+                        <div style="display: flex;flex-direction: row;justify-content: space-between;">
+                          <img src='{{this.documentFront}}' style="height: 200px;">
+                          <div style="display: flex;flex-direction: column;justify-content: space-around;">
+                          <a [href]='this.documentFront' target="_blank" rel="noopener">Download</a>
+                          <button type="button" class="btn btn-outline-dark " (click)='acceptDocument(student,"front")'>Accept</button>
+                          <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'foto documento frontale da rifare')"></button>
+                        </div>
+                        </div>
+
+                        <div style="display: flex;flex-direction: row;justify-content: space-between;">
+                          <img src='{{this.documentBack}}' style="height: 200px;">
+                          <div style="display: flex;flex-direction: column;justify-content: space-around;">
+                            <a [href]='this.documentBack' target="_blank" rel="noopener">Download</a>
+                          <button type="button" class="btn btn-outline-dark " (click)='acceptDocument(student,"back")'>Accept</button>
+                          <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'foto documento posteriore da rifare')"></button>
+                        </div>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer" style="">
+                        <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
+                      </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                  </div><!-- /.modal !-->
+
+                </td>
 
                 <td><div class="col text-center" >
                   <div style="display: flex;flex-direction: row;">
