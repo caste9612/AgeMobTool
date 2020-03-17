@@ -195,3 +195,15 @@
 [debug] [2020-03-17T10:06:31.302Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YWdlbW9iLTZjZmRlL3VzLWNlbnRyYWwxL3NlbmROb3RpZmljYXRpb24vMWFGRTRRdFJHaUU  
  
 [debug] [2020-03-17T10:06:31.715Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:06:33.719Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YWdlbW9iLTZjZmRlL3VzLWNlbnRyYWwxL3NlbmROb3RpZmljYXRpb24vMWFGRTRRdFJHaUU  
+ 
+[debug] [2020-03-17T10:06:34.101Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:06:36.104Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YWdlbW9iLTZjZmRlL3VzLWNlbnRyYWwxL3NlbmROb3RpZmljYXRpb24vMWFGRTRRdFJHaUU  
+ 
+[debug] [2020-03-17T10:06:36.515Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:06:38.518Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YWdlbW9iLTZjZmRlL3VzLWNlbnRyYWwxL3NlbmROb3RpZmljYXRpb24vMWFGRTRRdFJHaUU  
+ 
+[debug] [2020-03-17T10:06:38.864Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:06:40.865Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1/operations/YWdlbW9iLTZjZmRlL3VzLWNlbnRyYWwxL3NlbmROb3RpZmljYXRpb24vMWFGRTRRdFJHaUU  
+ 
+[debug] [2020-03-17T10:06:41.200Z] <<< HTTP RESPONSE 200
