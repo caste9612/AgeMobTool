@@ -248,15 +248,78 @@
                 <td>
                   <div class="col text-center">
                     <div style="display: flex;flex-direction: row;">
-                      <button type="button" class="btnDUV " style="width: 70px" >View</button>
+                      <button type="button" class="btnDUV " style="width: 70px" (click)='openFeedbackModal(student,"feedback1")'>View</button>
                       <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi inviare la prima ruota del tirocinio')"></button>
+
+
+                      <div class="backdrop" [ngStyle]="{'display':displayFeedback}">
+                      </div>
+                      <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayFeedback}">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                              <h4 class="modal-title">Student Feedback</h4>
+                              <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                          </div>
+                          <div class="modal-body">
+
+                            <google-chart #chart
+                            [title]="title"
+                            [type]="type"
+                            [data]="data"
+                            [columnNames]="columnNames"
+                            [options]="options"
+                            [width]="width"
+                            [height]="height">
+                         </google-chart>
+
+                          </div>
+                            <div class="modal-footer">
+                              <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
+                          </div>
+                        </div><!-- /.modal-content -->
+                      </div><!-- /.modal-dialog -->
+                      </div><!-- /.modal !-->
+
+
                     </div>
                   </div>
                 </td>
                 <td> <div class="col text-center">
                   <div style="display: flex;flex-direction: row;">
-                    <button type="button" class="btnDUV " style="width: 80px" >View</button>
+                    <button type="button" class="btnDUV " style="width: 70px" (click)='openFeedbackModal(student,"feedback2")' >View</button>
                     <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi inviare la seconda ruota del tirocinio')"></button>
+
+                    <div class="backdrop" [ngStyle]="{'display':displayFeedback}">
+                    </div>
+                    <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':displayFeedback}">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Student Feedback</h4>
+                            <button type="button" class="close" aria-label="Close"  (click)="onCloseHandled()"> <span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+
+                          <google-chart #chart
+                          [title]="title"
+                          [type]="type"
+                          [data]="data"
+                          [columnNames]="columnNames"
+                          [options]="options"
+                          [width]="width"
+                          [height]="height">
+                       </google-chart>
+
+                        </div>
+                          <div class="modal-footer">
+                            <button class="btn btn-primary" (click)="onCloseHandled()">Close</button>
+                        </div>
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal !-->
+
+
                   </div>
                 </div></td>
 

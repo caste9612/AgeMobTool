@@ -1,0 +1,136 @@
+[debug] [2020-03-17T10:04:08.475Z] ----------------------------------------------------------------------
+[debug] [2020-03-17T10:04:08.476Z] Command:       /usr/bin/node /usr/bin/firebase deploy
+[debug] [2020-03-17T10:04:08.476Z] CLI Version:   7.13.1
+[debug] [2020-03-17T10:04:08.476Z] Platform:      linux
+[debug] [2020-03-17T10:04:08.476Z] Node Version:  v13.10.1
+[debug] [2020-03-17T10:04:08.476Z] Time:          Tue Mar 17 2020 11:04:08 GMT+0100 (Ora standard dell’Europa centrale)
+[debug] [2020-03-17T10:04:08.477Z] ----------------------------------------------------------------------
+[debug] [2020-03-17T10:04:08.477Z] 
+[debug] [2020-03-17T10:04:08.481Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-03-17T10:04:08.482Z] > authorizing via signed-in user
+[debug] [2020-03-17T10:04:08.482Z] [iam] checking project agemob-6cfde for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2020-03-17T10:04:08.484Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-03-17T10:04:08.484Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-03-17T10:04:08.771Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:08.778Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/agemob-6cfde:testIamPermissions  
+
+[debug] [2020-03-17T10:04:09.822Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:09.826Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/agemob-6cfde  
+ 
+[debug] [2020-03-17T10:04:10.277Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'agemob-6cfde'...
+[info] 
+[info] i  deploying database, storage, firestore, functions, hosting
+[info] Running command: npm --prefix "$RESOURCE_DIR" run lint
+[info] Running command: npm --prefix "$RESOURCE_DIR" run build
+[info] ✔  functions: Finished running predeploy script.
+[info] i  database: checking rules syntax...
+[debug] [2020-03-17T10:04:17.349Z] >>> HTTP REQUEST PUT https://agemob-6cfde.firebaseio.com/.settings/rules.json?dryRun=true  
+ {
+  /* Visit https://firebase.google.com/docs/database/security to learn more about security rules. */
+  "rules": {
+    ".read": false,
+    ".write": false
+  }
+}
+[debug] [2020-03-17T10:04:18.107Z] <<< HTTP RESPONSE 200
+[info] ✔  database: rules syntax for database agemob-6cfde is valid
+[debug] [2020-03-17T10:04:18.108Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/agemob-6cfde  
+ 
+[debug] [2020-03-17T10:04:19.366Z] <<< HTTP RESPONSE 200
+[info] i  firebase.storage: checking storage.rules for compilation errors...
+[debug] [2020-03-17T10:04:19.369Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/agemob-6cfde:test  
+
+[debug] [2020-03-17T10:04:20.371Z] <<< HTTP RESPONSE 200
+[warn] ⚠  [W] undefined:undefined - Ruleset uses old version (version [1]). Please update to the latest version (version [2]).
+[info] ✔  firebase.storage: rules file storage.rules compiled successfully
+[info] i  firestore: reading indexes from firestore.indexes.json...
+[info] i  cloud.firestore: checking firestore.rules for compilation errors...
+[debug] [2020-03-17T10:04:20.375Z] >>> HTTP REQUEST POST https://firebaserules.googleapis.com/v1/projects/agemob-6cfde:test  
+
+[debug] [2020-03-17T10:04:20.751Z] <<< HTTP RESPONSE 200
+[info] ✔  cloud.firestore: rules file firestore.rules compiled successfully
+[debug] [2020-03-17T10:04:20.753Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "lint": "tslint --project tsconfig.json",
+    "build": "tsc",
+    "serve": "npm run build && firebase serve --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "8"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "firebase-admin": "^8.6.0",
+    "firebase-functions": "^3.3.0"
+  },
+  "devDependencies": {
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2",
+    "firebase-functions-test": "^0.1.6"
+  },
+  "private": true
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[debug] [2020-03-17T10:04:20.755Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/agemob-6cfde/services/cloudfunctions.googleapis.com  
+ 
+[debug] [2020-03-17T10:04:20.757Z] >>> HTTP REQUEST GET https://serviceusage.googleapis.com/v1/projects/agemob-6cfde/services/runtimeconfig.googleapis.com  
+ 
+[debug] [2020-03-17T10:04:21.950Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:23.082Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2020-03-17T10:04:23.083Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/agemob-6cfde/adminSdkConfig  
+ 
+[debug] [2020-03-17T10:04:23.376Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:23.379Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/agemob-6cfde/versions  
+
+[debug] [2020-03-17T10:04:24.978Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:24.983Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/agemob-6cfde/releases?pageSize=10&pageToken=  
+ 
+[debug] [2020-03-17T10:04:25.950Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:25.951Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/agemob-6cfde/rulesets/bfeadb29-e6fe-488b-82ae-22153c4bc9ea  
+ 
+[debug] [2020-03-17T10:04:26.913Z] <<< HTTP RESPONSE 200
+[info] i  storage: latest version of storage.rules already up to date, skipping upload...
+[debug] [2020-03-17T10:04:26.919Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/agemob-6cfde/releases?pageSize=10&pageToken=  
+ 
+[debug] [2020-03-17T10:04:26.921Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta2/projects/agemob-6cfde/databases/(default)/collectionGroups/-/indexes  
+ 
+[debug] [2020-03-17T10:04:27.314Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:27.316Z] >>> HTTP REQUEST GET https://firestore.googleapis.com/v1beta2/projects/agemob-6cfde/databases/(default)/collectionGroups/-/fields?filter=indexConfig.usesAncestorConfig=false  
+ 
+[debug] [2020-03-17T10:04:27.694Z] <<< HTTP RESPONSE 200
+[info] ✔  firestore: deployed indexes in firestore.indexes.json successfully
+[debug] [2020-03-17T10:04:28.905Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:28.906Z] >>> HTTP REQUEST GET https://firebaserules.googleapis.com/v1/projects/agemob-6cfde/rulesets/1c149808-eff9-4d13-99bc-f2170b73bdfe  
+ 
+[debug] [2020-03-17T10:04:29.860Z] <<< HTTP RESPONSE 200
+[info] i  firestore: latest version of firestore.rules already up to date, skipping upload...
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2020-03-17T10:04:29.864Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/agemob-6cfde/configs  
+ 
+[debug] [2020-03-17T10:04:30.265Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (32.75 KB) for uploading
+[debug] [2020-03-17T10:04:30.422Z] >>> HTTP REQUEST POST https://cloudfunctions.googleapis.com/v1/projects/agemob-6cfde/locations/us-central1/functions:generateUploadUrl  
+ 
+[debug] [2020-03-17T10:04:31.280Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:31.282Z] >>> HTTP REQUEST PUT https://storage.googleapis.com/gcf-upload-us-central1-d9700a7e-5d3c-46bd-83cd-53fce582958d/ea5bf12a-d607-4c3a-bb72-f0002cadb3c8.zip?GoogleAccessId=service-753305293844@gcf-admin-robot.iam.gserviceaccount.com&Expires=1584441271&Signature=RqZkP8IUCtUrWoyoWx0DKENDHIuA7IuNP32s6VJQknyLxML1%2BnwvPVFtveGYN3k%2BE2zmXbddq2dEFhyy7YS3zWN%2FGR9ALLZ%2FCHfy1mJwdDJSwq%2F3aBySQriocE1Tf4qYO4k9Icv%2F%2FaS9Q5xOxcjnbarlWkk5l42m8cc3lIwQAalKwXa9FAGuB5zF8qrhX8IQB8%2FzlMgmPmXSgO%2FXZppCRei5bnjzeRr9d3661AgZtvaqPW9c6tQFQ4OA5SpxdParhg9d6%2B8u8qDTRdSLJ2YSekhYRcKimKg0%2FeWjWyxA9XgqzO4Birm5tuG14%2FRJS%2Bm2hIpXiw6jvVeWhDWrAI0Weg%3D%3D  
+ <request body omitted>
+[debug] [2020-03-17T10:04:33.138Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[info] i  hosting[agemob-6cfde]: beginning deploy...
+[info] i  hosting[agemob-6cfde]: found 30 files in dist/AgeMobOT
+[debug] [2020-03-17T10:04:34.577Z] [hosting] hash cache [ZGlzdC9BZ2VNb2JPVA] stored for 30 files
+[debug] [2020-03-17T10:04:34.578Z] [hosting][hash queue][FINAL]
+[debug] [2020-03-17T10:04:34.578Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/agemob-6cfde/versions/8f001b759b45f876:populateFiles  
+ <request body omitted>
+[debug] [2020-03-17T10:04:36.033Z] <<< HTTP RESPONSE 200
+[debug] [2020-03-17T10:04:36.054Z] [hosting][populate queue][FINAL]
+[debug] [2020-03-17T10:04:36.055Z] [hosting] uploads queued: 8

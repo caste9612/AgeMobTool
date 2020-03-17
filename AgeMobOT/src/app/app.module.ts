@@ -25,6 +25,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from '../environments/environment';
 import {AngularFireStorageModule} from "@angular/fire/storage";
 
+//Google charts
+import {GoogleChartsModule} from 'angular-google-charts'
+
 
 // Auth service
 import { AuthService } from "./shared/services/auth.service";
@@ -65,6 +68,7 @@ import { NgForOf, NgIf } from '@angular/common';
     AngularFireStorageModule,
     ReactiveFormsModule,
     TreeModule,
+    GoogleChartsModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]

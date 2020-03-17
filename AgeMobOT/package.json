@@ -26,6 +26,7 @@
     "@types/chart.js": "^2.9.15",
     "angular-bootstrap-md": "^8.10.1",
     "angular-font-awesome": "^3.1.2",
+    "angular-google-charts": "^0.1.6",
     "animate.css": "^3.7.2",
     "bootstrap": "^4.4.1",
     "chart.js": "^2.5.0",

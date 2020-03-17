@@ -40,6 +40,7 @@ export class StudentListComponent implements OnInit , AfterViewInit{
   columns: string[] = [];
   rows: number[] = [];
   display2 = 'none';
+  displayFeedback = 'none';
   ols1;
   ols2;
 
@@ -169,6 +170,12 @@ export class StudentListComponent implements OnInit , AfterViewInit{
     this.displayDownloadDepartureTicket = 'none';
     this.displayCredential = 'none';
     this.displayDocumentDownload = 'none';
+    this.displayFeedback = 'none';
+
+    this.data = [
+
+    ];
+
 
   }
 
@@ -231,6 +238,44 @@ acceptDocument(student, type){
     this.dataService.getStudentReference(this.dataService.uploadingStudent).update({back: "accepted"});
   }
 }
+
+title;
+type = 'PieChart';
+data = [
+
+];
+columnNames = ['Activity', 'Satisfaction'];
+options = {
+};
+width = '100%';
+height = 'auto';
+
+
+
+openFeedbackModal(student,type){
+  this.displayFeedback = 'block';
+
+  this.dataService.uploadingStudent = student;
+
+  this.dataService.getStudentFeedbackFolder().snapshotChanges().subscribe(
+   documents => documents.forEach(document => {
+     if (document.payload.doc.id === type){
+       this.data = [
+         ['work', document.payload.doc.data().work],
+         ['culture', document.payload.doc.data().culture],
+         ['fun', document.payload.doc.data().fun],
+         ['health', document.payload.doc.data().health],
+         ['social_relation', document.payload.doc.data().social_relation],
+         ['organization', document.payload.doc.data().organization]
+       ];
+     }
+   })
+ )
+
+}
+
+
+
 
 
  openModalUpload(student,action) {

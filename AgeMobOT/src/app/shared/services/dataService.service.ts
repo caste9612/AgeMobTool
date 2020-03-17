@@ -97,6 +97,13 @@ export class DataServiceService {
     .collection('document');
   }
 
+  getStudentFeedbackFolder() {
+    return this.projects.doc(this.selectedProject).collection('Countries')
+    .doc(this.selectedCountry).collection('Destinations').doc(this.selectedDestination)
+    .collection('Date').doc(this.selectedDate).collection('Students').doc(this.uploadingStudent)
+    .collection('feedbacks');
+  }
+
   addMessage(student: string, type: string) {
     this.users.get().subscribe(
       users => users.forEach(
