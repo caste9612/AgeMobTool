@@ -142,6 +142,9 @@ export class StudentListComponent implements OnInit , AfterViewInit{
           document.getElementById('documentButton' + element.payload.doc.id).style.backgroundColor = 'red';
         }
 
+        document.getElementById('feedback1Button' + element.payload.doc.id).style.backgroundColor = element.payload.doc.data().midTerm;
+        document.getElementById('feedback2Button' + element.payload.doc.id).style.backgroundColor = element.payload.doc.data().finalTerm;
+
 
         this.dataService.getUsers().subscribe(
           users => users.forEach(
@@ -400,10 +403,14 @@ addStudent(studentName, mail, number){
 
   stud.set({
 
+    finalTerm: 'red',
+    midTerm: 'red',
     ols1: 'red',
     ols2: 'red',
     email: mail,
     contact: number,
+    departureTicket: '',
+    returnTicket: '',
     report: 'red'
     //setsomevalue
   })

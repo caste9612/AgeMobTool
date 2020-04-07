@@ -248,7 +248,7 @@
                 <td>
                   <div class="col text-center">
                     <div style="display: flex;flex-direction: row;">
-                      <button type="button" class="btnDUV " style="width: 70px" (click)='openFeedbackModal(student,"feedback1")'>View</button>
+                      <button type="button" class="btnDUV " style="width: 70px" (click)='openFeedbackModal(student,"feedback1")' id="{{'feedback1Button' + student}}">View</button>
                       <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi inviare la prima ruota del tirocinio')"></button>
 
 
@@ -287,7 +287,7 @@
                 </td>
                 <td> <div class="col text-center">
                   <div style="display: flex;flex-direction: row;">
-                    <button type="button" class="btnDUV " style="width: 70px" (click)='openFeedbackModal(student,"feedback2")' >View</button>
+                    <button type="button" class="btnDUV " style="width: 70px" (click)='openFeedbackModal(student,"feedback2")' id="{{'feedback2Button' + student}}">View</button>
                     <button type="button" class="btn btn-outline-danger fas fa-bell" style="border: none;" (click)="sendNotification(student,'devi inviare la seconda ruota del tirocinio')"></button>
 
                     <div class="backdrop" [ngStyle]="{'display':displayFeedback}">

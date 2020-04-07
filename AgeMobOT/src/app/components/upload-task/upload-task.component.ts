@@ -49,7 +49,7 @@ export class UploadTaskComponent implements OnInit {
 
         if(this.dataService.actionUpload === 'departure'){
           this.dataService.getStudentTicketsFolder().doc('departure').set( { downloadURL: this.downloadURL, path });
-          this.dataService.student.doc(this.dataService.uploadingStudent).update({departureTicket: 'Uploaded'}).then(() => {
+          this.dataService.getStudentListReference().doc(this.dataService.uploadingStudent).update({departureTicket: 'Uploaded'}).then(() => {
             console.log('done');
           })
           .catch(function(error) {
@@ -58,7 +58,7 @@ export class UploadTaskComponent implements OnInit {
         }
         if(this.dataService.actionUpload === 'return'){
           this.dataService.getStudentTicketsFolder().doc('return').set( { downloadURL: this.downloadURL, path });
-          this.dataService.student.doc(this.dataService.uploadingStudent).update({returnTicket: 'Uploaded'}).then(() => {
+          this.dataService.getStudentListReference().doc(this.dataService.uploadingStudent).update({returnTicket: 'Uploaded'}).then(() => {
             console.log('done');
           })
           .catch(function(error) {
